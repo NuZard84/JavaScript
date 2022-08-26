@@ -14,7 +14,7 @@ html {
 body {
   font-family: 'Nunito', sans-serif;
   font-weight: 400;
-  height: 100vh;
+  min-height: 100vh;
   color: #333;
   background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);
   display: flex;
@@ -131,7 +131,7 @@ main {
 
 .btn--rule {
   
-  top: 50px;
+  top: 10px;
   padding-left: 50px;
   padding-right: 50px;
   border: solid 3px #2f2f2f;
