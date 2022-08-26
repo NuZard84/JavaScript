@@ -13,6 +13,11 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 const btnNew = document.querySelector('.btn--new');
 
+const closeModal = document.querySelector('.close-modal');
+const overlay = document.querySelector('.overlay');
+const btnRule = document.querySelector('.btn--rule');
+const modal = document.querySelector('.modal');
+
 let scores, currentScore, activePlayer, playing;
 const start = function () {
   scores = [0, 0];
@@ -25,14 +30,15 @@ const start = function () {
   current0El.textContent = 0;
   current1El.textContent = 0;
 
-  if (player1El.classList.contains('player--winner') || player0El.classList.contains('player--winner')) {
-
+  if (
+    player1El.classList.contains('player--winner') ||
+    player0El.classList.contains('player--winner')
+  ) {
     player0El.classList.remove('player--winner');
     player1El.classList.remove('player--winner');
-    
   }
-  document.querySelector('.waviy-0').style.bottom = '150px';
-  document.querySelector('.waviy-1').style.bottom = '150px';
+  document.querySelector('.waviy-0').style.bottom = '500px';
+  document.querySelector('.waviy-1').style.bottom = '500px';
 
   diceEl.classList.add('hidden');
   player0El.classList.add('player--active');
@@ -65,6 +71,29 @@ btnRoll.addEventListener('click', function () {
     }
   }
 });
+
+function openModal() {
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+}
+
+function shutModal() {
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
+}
+
+
+btnRule.addEventListener('click', openModal);
+
+closeModal.addEventListener('click', shutModal);
+
+document.addEventListener('keydown', function (e) {
+  
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    
+    shutModal();
+  }
+})
 
 btnHold.addEventListener('click', function () {
   if (playing) {
