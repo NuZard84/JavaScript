@@ -15,7 +15,7 @@ const btnNew = document.querySelector('.btn--new');
 
 let scores, currentScore, activePlayer, playing;
 const start = function () {
-  scores = [0, 99];
+  scores = [0, 0];
   currentScore = 0;
   activePlayer = 0;
   playing = true;
