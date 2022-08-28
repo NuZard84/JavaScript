@@ -82,6 +82,7 @@ function shutModal() {
   overlay.classList.add('hidden');
 }
 
+overlay.addEventListener('click', shutModal);
 
 btnRule.addEventListener('click', openModal);
 
