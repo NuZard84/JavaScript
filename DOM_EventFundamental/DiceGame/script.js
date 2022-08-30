@@ -125,5 +125,5 @@ if (!isMobile) {
   
 }
 else {
-  console.log('You Should Activate Your Desktop Mode ..');
+  alert('You Should Activate Your Desktop Mode ..');
 }
