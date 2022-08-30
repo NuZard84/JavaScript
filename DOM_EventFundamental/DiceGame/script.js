@@ -118,3 +118,12 @@ btnHold.addEventListener('click', function () {
 });
 
 btnNew.addEventListener('click', start);
+
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if (!isMobile) {
+  console.log('it is window');
+  
+}
+else {
+  console.log('You Should Activate Your Desktop Mode ..');
+}
