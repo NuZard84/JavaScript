@@ -1,7 +1,7 @@
 'use strict';
 
 const isMobile = navigator.userAgentData.mobile;
-const x = document.getElementsByTagName('meta')[1];
+// const x = document.getElementsByTagName('meta')[1];
 
 if (isMobile) {
   alert('you vsit our web in mobile..for better experience turn on desktop-mode');
