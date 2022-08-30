@@ -89,12 +89,10 @@ btnRule.addEventListener('click', openModal);
 closeModal.addEventListener('click', shutModal);
 
 document.addEventListener('keydown', function (e) {
-  
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-    
     shutModal();
   }
-})
+});
 
 btnHold.addEventListener('click', function () {
   if (playing) {
@@ -119,20 +117,23 @@ btnHold.addEventListener('click', function () {
 
 btnNew.addEventListener('click', start);
 
-var viewMode = getCookie("view-mode"); 
+// var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+// if (!isMobile) {
+//   console.log('it is window');
 
-var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-if (!isMobile) {
-  console.log('it is window');
-  if(viewMode == "desktop"){ 
-    viewport.setAttribute('content', 'width=1024'); 
+// }
+// else {
+//   console.log('You should activate desktop mode...');
+// }
+function getCookie(x) {
+  return x;
 }
-  
-}
-else {
-  
- if (viewMode == "mobile"){ 
-    viewport.setAttribute('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no'); 
-} 
-  alert('using desktop mode for good experience ...');
+var viewMode =  getCookie('view-mode');
+if (viewMode === 'desktop') {
+  viewport.setAttribute('content', 'width=1024');
+} else if (viewMode === 'mobile') {
+  viewport.setAttribute(
+    'content',
+    'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no'
+  );
 }
