@@ -119,11 +119,20 @@ btnHold.addEventListener('click', function () {
 
 btnNew.addEventListener('click', start);
 
+var viewMode = getCookie("view-mode"); 
+
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 if (!isMobile) {
   console.log('it is window');
+  if(viewMode == "desktop"){ 
+    viewport.setAttribute('content', 'width=1024'); 
+}
   
 }
 else {
-  alert('You Should Activate Your Desktop Mode ..');
+  
+ if (viewMode == "mobile"){ 
+    viewport.setAttribute('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no'); 
+} 
+  alert('using desktop mode for good experience ...');
 }
