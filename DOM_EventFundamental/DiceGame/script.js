@@ -1,5 +1,16 @@
 'use strict';
 
+const isMobile = navigator.userAgentData.mobile;
+const x = document.getElementsByTagName('meta')[1];
+
+if (isMobile) {
+  x.content = 'width=device-width, initial-scale=1';
+}
+else {
+  console.log('desktop');
+}
+
+
 const score0El = document.getElementById('score--0');
 const score1El = document.getElementById('score--1');
 const current0El = document.getElementById('current--0');
@@ -125,15 +136,5 @@ btnNew.addEventListener('click', start);
 // else {
 //   console.log('You should activate desktop mode...');
 // }
-function getCookie(x) {
-  return x;
-}
-var viewMode =  getCookie('view-mode');
-if (viewMode === 'desktop') {
-  viewport.setAttribute('content', 'width=1024');
-} else if (viewMode === 'mobile') {
-  viewport.setAttribute(
-    'content',
-    'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no'
-  );
-}
+
+
