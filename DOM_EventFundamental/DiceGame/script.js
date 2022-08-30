@@ -4,7 +4,7 @@ const isMobile = navigator.userAgentData.mobile;
 const x = document.getElementsByTagName('meta')[1];
 
 if (isMobile) {
-  x.content = 'width=device-width, initial-scale=1';
+  alert('you vsit our web in mobile..for better experience turn on desktop-mode');
 }
 else {
   console.log('desktop');
