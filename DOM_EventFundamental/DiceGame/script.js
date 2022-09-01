@@ -4,12 +4,12 @@ const isMobile = navigator.userAgentData.mobile;
 // const x = document.getElementsByTagName('meta')[1];
 
 if (isMobile) {
-  alert('you vsit our web in mobile..for better experience turn on desktop-mode');
-}
-else {
+  alert(
+    'you vsit our web in mobile..for better experience turn on desktop-mode'
+  );
+} else {
   console.log('desktop');
 }
-
 
 const score0El = document.getElementById('score--0');
 const score1El = document.getElementById('score--1');
@@ -17,6 +17,7 @@ const current0El = document.getElementById('current--0');
 const current1El = document.getElementById('current--1');
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
+
 const winner = document.querySelector('.winner');
 
 const diceEl = document.querySelector('.dice');
@@ -136,5 +137,3 @@ btnNew.addEventListener('click', start);
 // else {
 //   console.log('You should activate desktop mode...');
 // }
-
-

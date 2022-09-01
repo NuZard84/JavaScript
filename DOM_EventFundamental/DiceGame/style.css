@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
 
 * {
   margin: 0;
@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family:  sans-serif;
   font-weight: 400;
   height: 100vh;
   color: #333;
@@ -187,7 +187,7 @@ main {
   transition: all ease-in 0.8s;
 }
 .waviy-0 span {
-  font-family: 'Nunito', sans-serif;
+  font-family:  sans-serif;
   position: relative;
   display: inline-block;
   color: #fff;
@@ -215,7 +215,7 @@ main {
   transition: all ease-in 0.8s;
 }
 .waviy-1 span {
-  font-family: 'Nunito', sans-serif;
+  font-family:  sans-serif;
   position: relative;
   display: inline-block;
   color: #fff;
