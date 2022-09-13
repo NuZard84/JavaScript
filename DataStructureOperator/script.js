@@ -1,152 +1,266 @@
 "use strict";
 
-const restaurant = {
-  name: "Classico Italiano",
-  location: "Via Angelo Tavanti 23, Firenze, Italy",
-  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
-  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
-  mainMenu: ["Pizza", "Pasta", "Risotto"],
-  openHours: {
-    thu: {
-      open: 12,
-      close: 12,
-    },
+// const restaurant = {
+//   name: "Classico Italiano",
+//   location: "Via Angelo Tavanti 23, Firenze, Italy",
+//   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+//   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+//   mainMenu: ["Pizza", "Pasta", "Risotto"],
+//   openHours: {
+//     thu: {
+//       open: 12,
+//       close: 12,
+//     },
 
-    fri: {
-      open: 11,
-      close: 13,
-    },
-    sat: {
-      open: 0,
-      close: 24,
-    },
-  },
+//     fri: {
+//       open: 11,
+//       close: 13,
+//     },
+//     sat: {
+//       open: 0,
+//       close: 24,
+//     },
+//   },
 
-  order(starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-  },
+//   order(starterIndex, mainIndex) {
+//     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+//   },
 
-    orderDelivery: function ({ time = '9:00', adress, nam, mainIndex, starterIndex }) {
-    console.log(
-      `${nam} ,your order ${this.starterMenu[starterIndex]} & ${this.mainMenu[mainIndex]}is recieved at ${adress} on precisely ${time}. Thank You ! `
-    );
+//     orderDelivery: function ({ time = '9:00', adress, nam, mainIndex, starterIndex }) {
+//     console.log(
+//       `${nam} ,your order ${this.starterMenu[starterIndex]} & ${this.mainMenu[mainIndex]}is recieved at ${adress} on precisely ${time}. Thank You ! `
+//     );
       
-    },
+//     },
     
-    orderExtra: function ( ex1, ex2, ex3 ) {
-        console.log(`here your extra item with dish; ${ex1},${ex2},${ex3}`);
-  },
+//     orderExtra: function ( ex1, ex2, ex3 ) {
+//         console.log(`here your extra item with dish; ${ex1},${ex2},${ex3}`);
+//   },
     
-    orderPizza: function (mainIng, ...otherIng) {
-      console.log(mainIng);
-      console.log(otherIng);
-    }
-};
+//     orderPizza: function (mainIng, ...otherIng) {
+//       console.log(mainIng);
+//       console.log(otherIng);
+//     }
+// };
 
-// restaurant.orderPizza('paneer - onion', 'oragano', 'tomato', 'catchup');
-// //spreading with rest....
+// // restaurant.orderPizza('paneer - onion', 'oragano', 'tomato', 'catchup');
+// // //spreading with rest....
 
-// const [pizza, , risotto, ...other] = [...restaurant.mainMenu, ...restaurant.starterMenu];
-// console.log(pizza,risotto,other);
+// // const [pizza, , risotto, ...other] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// // console.log(pizza,risotto,other);
 
-// //objects...
+// // //objects...
 
-// const { sat, ...weekdays } = restaurant.openHours;
-// console.log(sat, weekdays);
+// // const { sat, ...weekdays } = restaurant.openHours;
+// // console.log(sat, weekdays);
 
-// //function...
+// // //function...
 
-// function display(...num) {
-//   console.log(num);
-// }
+// // function display(...num) {
+// //   console.log(num);
+// // }
 
-// display(1, 2, 21, 2);
-// display(14, 19, 45, 3, 88, 78);
-// const n = [84, 84, 48, 48];
-// display(...n);
+// // display(1, 2, 21, 2);
+// // display(14, 19, 45, 3, 88, 78);
+// // const n = [84, 84, 48, 48];
+// // display(...n);
 
 
-// const extra = [prompt('1st item'), prompt('2nd item'), prompt('3rd item')];
+// // const extra = [prompt('1st item'), prompt('2nd item'), prompt('3rd item')];
 
-// restaurant.orderExtra(...extra);
-//Iterables : arrays, strings, maps, sets, NOT objects...
+// // restaurant.orderExtra(...extra);
+// //Iterables : arrays, strings, maps, sets, NOT objects...
 
-/*restaurant.orderDelivery({
-  time: '12:24',
-  adress: 'gandhinagar,skps. sct : 12',
-  nam: 'hett',
-  mainIndex: 1,
-  starterIndex: 2,
-});
+// /*restaurant.orderDelivery({
+//   time: '12:24',
+//   adress: 'gandhinagar,skps. sct : 12',
+//   nam: 'hett',
+//   mainIndex: 1,
+//   starterIndex: 2,
+// });
 
-restaurant.orderDelivery({
+// restaurant.orderDelivery({
     
-    adress: 'gandhinagar,skps. sct : 12',
-    nam: 'hett',
-    mainIndex: 1,
-    starterIndex: 2,
-}); */
+//     adress: 'gandhinagar,skps. sct : 12',
+//     nam: 'hett',
+//     mainIndex: 1,
+//     starterIndex: 2,
+// }); */
   
 
-// const arr = [1, 2, 3];
-// const [a, b, c] = arr;
-// console.log(a, b, c);  // 1,2,3
+// // const arr = [1, 2, 3];
+// // const [a, b, c] = arr;
+// // console.log(a, b, c);  // 1,2,3
 
-// let [frst, , secd] = restaurant.categories;
-// console.log(frst,secd); //italian , vegetarian
+// // let [frst, , secd] = restaurant.categories;
+// // console.log(frst,secd); //italian , vegetarian
 
-// //switching values...
-// const x = frst;
-// frst = secd;
-// secd = x;
-// console.log(frst,secd); //switched by normal logic
+// // //switching values...
+// // const x = frst;
+// // frst = secd;
+// // secd = x;
+// // console.log(frst,secd); //switched by normal logic
 
-// [frst, secd] = [secd, frst];
-// console.log(frst, secd); //switched by destructing
+// // [frst, secd] = [secd, frst];
+// // console.log(frst, secd); //switched by destructing
 
-// //receive 2 value from function...
-// let [starter, main] = restaurant.order(2, 0);
-// console.log(starter, main);
+// // //receive 2 value from function...
+// // let [starter, main] = restaurant.order(2, 0);
+// // console.log(starter, main);
 
-// //nested destructing...
-// const nested = [1, 2, [3, 4]];
-// const [i, , j] = nested;
-// console.log(i, j); //1 , [3,4]
-// const [p, , [q, r]] = nested;
-// console.log(p, q, r); //1,3,4
+// // //nested destructing...
+// // const nested = [1, 2, [3, 4]];
+// // const [i, , j] = nested;
+// // console.log(i, j); //1 , [3,4]
+// // const [p, , [q, r]] = nested;
+// // console.log(p, q, r); //1,3,4
 
-// //defualt value..
-// const [l = 1, m = 0 , n = 1] = [84, 48];
-// console.log(l,m,n);
+// // //defualt value..
+// // const [l = 1, m = 0 , n = 1] = [84, 48];
+// // console.log(l,m,n);
 
-//mutaning value of object destructer...
-// let ax = 88;
-// let bx = 44;
-// const obj = { ax:1, bx:2, cx:3};
-// ({ ax,bx } = obj);
-// console.log(ax, bx);
+// //mutaning value of object destructer...
+// // let ax = 88;
+// // let bx = 44;
+// // const obj = { ax:1, bx:2, cx:3};
+// // ({ ax,bx } = obj);
+// // console.log(ax, bx);
 
-//defualt value of destructer objexct...
-// const { menu = [], starterMenu: starter = [] } = restaurant;
-// console.log(menu, starter);
+// //defualt value of destructer objexct...
+// // const { menu = [], starterMenu: starter = [] } = restaurant;
+// // console.log(menu, starter);
 
-//operate nested object...
+// //operate nested object...
 
-// const {
-//   fri: { open, close }
-// } = openHours;
-// console.log(open, close);
+// // const {
+// //   fri: { open, close }
+// // } = openHours;
+// // console.log(open, close);
 
-//spread operateer...
-// const arr = [3, 4, 5];
-// const newArr = [1, 2, ...arr];
-// console.log(newArr);
+// //spread operateer...
+// // const arr = [3, 4, 5];
+// // const newArr = [1, 2, ...arr];
+// // console.log(newArr);
 
-//objects with spreading...
-// const newRestaurant = { founder: 'unknown', ...restaurant };  //adding new elements in object...
-// const restaurantCoppy = { ...restaurant };
-// restaurantCoppy.name = 'lila hotel';
-// console.log(restaurantCoppy.name); //'lila hotel'...unlikely, here can not change old object elements value beacuse of use of spreading...
-// console.log(restaurant.name); //'Classico Italiano'
+// //objects with spreading...
+// // const newRestaurant = { founder: 'unknown', ...restaurant };  //adding new elements in object...
+// // const restaurantCoppy = { ...restaurant };
+// // restaurantCoppy.name = 'lila hotel';
+// // console.log(restaurantCoppy.name); //'lila hotel'...unlikely, here can not change old object elements value beacuse of use of spreading...
+// // console.log(restaurant.name); //'Classico Italiano'
+
+// // AND - OR...
+
+// //OR = when the 1st value is truthy then it will be answer, instead it give best truthy value..
+// //AND = when the 1st value is falsy then it will be answer, instead it gives least truthy value
+
+// console.log(8 || 'hett');  //8
+// console.log('' || 'hett');  //hett
+// console.log(1 || 0);       //1
+// console.log(undefined || null); //null
+
+// console.log(0 && 1);    //0
+// console.log('hett' && '');  //''
+// console.log(null && undefined); //null
+// console.log('hett' && 8);   //8 ; truthy && truthy ,so it give last value...
+// console.log(undefined && null);   //undefined
+
+// //nullish = null and undefined (not 0 & '');
+// const add = 0;
+// console.log(add || 8);
+// console.log(add ?? 8);  //it consider value of add as a value not an falsy value..
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+/*
+We're building a football betting app (soccer for my American friends 😅)!
+Suppose we get data from a web service about a certain game (below). In this challenge we're gonna work with the data. So here are your tasks:
+1. Create one player array for each team (variables 'players1' and 'players2')✔
+2. The first player in any player array is the goalkeeper and the others are field players. For Bayern Munich (team 1) create one variable ('gk') with the goalkeeper's name, and one array ('fieldPlayers') with all the remaining 10 field players✔
+3. Create an array 'allPlayers' containing all players of both teams (22 players)✔
+4. During the game, Bayern Munich (team 1) used 3 substitute players. So create a new array ('players1Final') containing all the original team1 players plus 'Thiago', 'Coutinho' and 'Perisic'✔
+5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')✔ 
+6. Write a function ('printGoals') that receives an arbitrary number of player names (NOT an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)✔
+7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, WITHOUT using an if/else statement or the ternary operator.
+TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
+GOOD LUCK 😀
+*/
+//1.
+// const players1 = [game.team1, ...game.players[0]];
+// const players2 = [game.team2, ...game.players[1]];
+//OR...
+// const [players1, players2] = game.players;
+
+// //2.
+// // const gk1 = game.team1;
+// // const gk2 = game.team2;
+// //OR
+// const [gk1, ...fieldPlayers1] = players1;
+// const [gk2, ...fieldPlayers2] = players2;
+
+// // const fieldPlayers1 = [...game.players[0]];
+// // const fieldPlayers2 = [...game.players[1]];
+
+// //3.
+// // const allPlayers = [game.team1, ...game.players[0], game.team2, ...game.players[1]];
+// //OR
+// const allPlayers = [...players1, ...players2];
+
+// //4.
+// const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+
+// //5.
+// // const [team1, draw, team2] = [game.odds.team1, game.odds.x, game.odds.team2];
+// //OR
+// const { odds: { team1, x: draw, team2 } } = game;
+
+// //6.
+// function scorer(...scorer) {
+//   console.log(String(scorer));
+//   console.log(`${scorer.length} goals were scored...`);
+// }
+// scorer(...game.scored);
+// scorer('Davies', 'Muller', 'Lewandowski','Kimmich',...game.scored);
+
+// //7.
+// team1 < team2 && console.log('team 1 is more likely to win..');
 
 
