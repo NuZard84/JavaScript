@@ -1,47 +1,65 @@
 "use strict";
 
-// const restaurant = {
-//   name: "Classico Italiano",
-//   location: "Via Angelo Tavanti 23, Firenze, Italy",
-//   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
-//   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
-//   mainMenu: ["Pizza", "Pasta", "Risotto"],
-//   openHours: {
-//     thu: {
-//       open: 12,
-//       close: 12,
-//     },
+const weekdays = ['mon', 'tue', 'wed', 'thur', 'fri', 'sat', 'sun'];
 
-//     fri: {
-//       open: 11,
-//       close: 13,
-//     },
-//     sat: {
-//       open: 0,
-//       close: 24,
-//     },
-//   },
+const openHours = {
+  [weekdays[3]]: {  //it is work as thursday...
+    open: 12,
+    close: 12,
+  },
 
-//   order(starterIndex, mainIndex) {
-//     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-//   },
+  fri: {
+    open: 11,
+    close: 13,
+  },
+  sat: {
+    open: 0,
+    close: 24,
+  },
+};
 
-//     orderDelivery: function ({ time = '9:00', adress, nam, mainIndex, starterIndex }) {
-//     console.log(
-//       `${nam} ,your order ${this.starterMenu[starterIndex]} & ${this.mainMenu[mainIndex]}is recieved at ${adress} on precisely ${time}. Thank You ! `
-//     );
+const restaurant = {
+  name: "Classico Italiano",
+  location: "Via Angelo Tavanti 23, Firenze, Italy",
+  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+  mainMenu: ["Pizza", "Pasta", "Risotto"],
+  
+  //ES6 enhancedobject literal
+  openHours,
+  
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+    orderDelivery: function ({ time = '9:00', adress, nam, mainIndex, starterIndex }) {
+    console.log(
+      `${nam} ,your order ${this.starterMenu[starterIndex]} & ${this.mainMenu[mainIndex]}is recieved at ${adress} on precisely ${time}. Thank You ! `
+    );
       
-//     },
+    },
+    //it is also accesable...
+    orderExtra( ex1, ex2, ex3 ) {
+        console.log(`here your extra item with dish; ${ex1},${ex2},${ex3}`);
+  },
     
-//     orderExtra: function ( ex1, ex2, ex3 ) {
-//         console.log(`here your extra item with dish; ${ex1},${ex2},${ex3}`);
-//   },
-    
-//     orderPizza: function (mainIng, ...otherIng) {
-//       console.log(mainIng);
-//       console.log(otherIng);
-//     }
-// };
+    orderPizza: function (mainIng, ...otherIng) {
+      console.log(mainIng);
+      console.log(otherIng);
+    }
+};
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
+
+for (const i of menu) console.log(i);
+
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1} : ${el}`)
+}
+
+console.log(menu.entries);
+console.log(menu.entries());
 
 // // restaurant.orderPizza('paneer - onion', 'oragano', 'tomato', 'catchup');
 // // //spreading with rest....
@@ -262,5 +280,4 @@ GOOD LUCK 😀
 
 // //7.
 // team1 < team2 && console.log('team 1 is more likely to win..');
-
 
