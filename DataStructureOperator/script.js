@@ -35,8 +35,36 @@ const restaurant = {
     
     orderExtra: function ( ex1, ex2, ex3 ) {
         console.log(`here your extra item with dish; ${ex1},${ex2},${ex3}`);
+  },
+    
+    orderPizza: function (mainIng, ...otherIng) {
+      console.log(mainIng);
+      console.log(otherIng);
     }
 };
+
+// restaurant.orderPizza('paneer - onion', 'oragano', 'tomato', 'catchup');
+// //spreading with rest....
+
+// const [pizza, , risotto, ...other] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// console.log(pizza,risotto,other);
+
+// //objects...
+
+// const { sat, ...weekdays } = restaurant.openHours;
+// console.log(sat, weekdays);
+
+// //function...
+
+// function display(...num) {
+//   console.log(num);
+// }
+
+// display(1, 2, 21, 2);
+// display(14, 19, 45, 3, 88, 78);
+// const n = [84, 84, 48, 48];
+// display(...n);
+
 
 // const extra = [prompt('1st item'), prompt('2nd item'), prompt('3rd item')];
 
@@ -115,8 +143,10 @@ restaurant.orderDelivery({
 // console.log(newArr);
 
 //objects with spreading...
-const newRestaurant = { founder: 'unknown', ...restaurant };  //adding new elements in object...
-const restaurantCoppy = { ...restaurant };
-restaurantCoppy.name = 'lila hotel';
-console.log(restaurantCoppy.name); //'lila hotel'...unlikely, here can not change old object elements value beacuse of use of spreading...
-console.log(restaurant.name); //'Classico Italiano'
+// const newRestaurant = { founder: 'unknown', ...restaurant };  //adding new elements in object...
+// const restaurantCoppy = { ...restaurant };
+// restaurantCoppy.name = 'lila hotel';
+// console.log(restaurantCoppy.name); //'lila hotel'...unlikely, here can not change old object elements value beacuse of use of spreading...
+// console.log(restaurant.name); //'Classico Italiano'
+
+
