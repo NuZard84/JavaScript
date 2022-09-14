@@ -54,6 +54,32 @@ const restaurant = {
     console.log(otherIng);
   },
 };
+
+//making Map..
+const rest = new Map();
+rest.set("name", "subh hotel"); //add key and value...
+rest
+  .set("menu", ["Italian", "Pizzeria", "Vegetarian", "Organic"])
+  .set("open", 11)
+  .set("close", 23)
+  .set(true, "we are opened")
+  .set(false, "we are closed"); //this is also way of add key and element by chaining
+
+console.log(rest);
+console.log(rest.set("food", ["pizza", "dal-bhat", "dal-fry"])); //it will not give only this key and value but all included data will be given in console...
+
+console.log(rest.get("name")); //subh hotel...
+const time = 10;
+console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
+
+//array as map key...
+const arr = [1, 2];
+rest.set(arr, "test");
+rest.set([4.8], "test0");
+console.log(rest.get(arr)); //test..
+// console.log(rest.get([4,8])); //it can be access becuase of both key is different place in heap it can be as key...
+console.log(rest.get(4)); //it also undefine
+
 //key ,value, entry...
 // const k = Object.keys(openHours);
 // console.log(k);
@@ -69,7 +95,7 @@ const restaurant = {
 //   console.log(`${key},${open},${close}`);  //thur,11,12
 // }
 
- //OPTIONAL CHAINING...
+//OPTIONAL CHAINING...
 
 // console.log(restaurant.openHours.mon?.open); //undefine
 // console.log(restaurant.openHours?.mon?.open); //undefine
@@ -89,7 +115,7 @@ const restaurant = {
 
 // //method..
 // console.log(restaurant.order?.(0,1) ?? 'method does not exist');
-// console.log(restaurant.orderRisato?.(0, 1) ?? 'method does not exist'); //method does not exist 
+// console.log(restaurant.orderRisato?.(0, 1) ?? 'method does not exist'); //method does not exist
 
 // //array..
 // const user = [
@@ -318,7 +344,9 @@ GOOD LUCK 😀
 // //5.
 // // const [team1, draw, team2] = [game.odds.team1, game.odds.x, game.odds.team2];
 // //OR
-const { odds: { team1, x: draw, team2 } } = game;
+// const {
+//   odds: { team1, x: draw, team2 },
+// } = game;
 
 // //6.
 // function scorer(...scorer) {
@@ -350,23 +378,30 @@ GOOD LUCK 😀
 */
 
 //1.
-for (const [goal,gk] of game.scored.entries()) {
-  console.log(`gaoal ${goal + 1} : ${gk}`);
-}
+// for (const [goal,gk] of game.scored.entries()) {
+//   console.log(`gaoal ${goal + 1} : ${gk}`);
+// }
 
-//2.
-// const avg = team1 + draw + team2 / 3;
+// //2.
+// // const avg = team1 + draw + team2 / 3;
+// // console.log(avg);
+// //OR...
+// let avg = 0;
+// for (const odd of Object.values(game.odds)) {
+//   avg += odd;
+// }
+// avg /= Object.values(game.odds).length;
 // console.log(avg);
-//OR...
-let avg = 0;
-for (const odd of Object.values(game.odds)) {
-  avg += odd;
-}
-avg /= Object.values(game.odds).length;
-console.log(avg);
 
-//3.
-for (const [team, odd] of Object.entries(game.odds)) {
-  const str = team === 'x' ? 'draw' : `victory ${game.team1}`
-  console.log(`odd ${str} ${odd}`);
-}
+// //3.
+// for (const [team, odd] of Object.entries(game.odds)) {
+//   const str = team === 'x' ? 'draw' : `victory ${game.team1}`
+//   console.log(`odd ${str} ${odd}`);
+// }
+
+//Sets....it has no index and it gives ever unique elements and there is no way get out data from it and its order is not not relavent...
+// const orderset = new Set(["hett", "vb", "krish", "sarang"]);
+// const orderset2 = ["hett", "vb", "krish"];
+// console.log(orderset);
+// console.log(...orderset); //strings
+// console.log(...new Set(orderset2));
