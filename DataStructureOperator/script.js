@@ -1,9 +1,10 @@
 "use strict";
 
-const weekdays = ['mon', 'tue', 'wed', 'thur', 'fri', 'sat', 'sun'];
+const weekdays = ["mon", "tue", "wed", "thur", "fri", "sat", "sun"];
 
 const openHours = {
-  [weekdays[3]]: {  //it is work as thursday...
+  [weekdays[3]]: {
+    //it is work as thursday...
     open: 12,
     close: 12,
   },
@@ -24,42 +25,93 @@ const restaurant = {
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
   mainMenu: ["Pizza", "Pasta", "Risotto"],
-  
+
   //ES6 enhancedobject literal
   openHours,
-  
+
   order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
-    orderDelivery: function ({ time = '9:00', adress, nam, mainIndex, starterIndex }) {
+  orderDelivery: function ({
+    time = "9:00",
+    adress,
+    nam,
+    mainIndex,
+    starterIndex,
+  }) {
     console.log(
       `${nam} ,your order ${this.starterMenu[starterIndex]} & ${this.mainMenu[mainIndex]}is recieved at ${adress} on precisely ${time}. Thank You ! `
     );
-      
-    },
-    //it is also accesable...
-    orderExtra( ex1, ex2, ex3 ) {
-        console.log(`here your extra item with dish; ${ex1},${ex2},${ex3}`);
   },
-    
-    orderPizza: function (mainIng, ...otherIng) {
-      console.log(mainIng);
-      console.log(otherIng);
-    }
+  //it is also accesable...
+  orderExtra(ex1, ex2, ex3) {
+    console.log(`here your extra item with dish; ${ex1},${ex2},${ex3}`);
+  },
+
+  orderPizza: function (mainIng, ...otherIng) {
+    console.log(mainIng);
+    console.log(otherIng);
+  },
 };
+//key ,value, entry...
+const k = Object.keys(openHours);
+console.log(k);
+for (const ky of k) {
+  console.log(ky);
+}
+const v = Object.values(openHours);
+console.log(v);
 
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-console.log(menu);
-
-for (const i of menu) console.log(i);
-
-for (const [i, el] of menu.entries()) {
-  console.log(`${i + 1} : ${el}`)
+const ent = Object.entries(openHours);
+console.log(ent);
+for (const [key, { open, close }] of ent) {
+  console.log(`${key},${open},${close}`);
 }
 
-console.log(menu.entries);
-console.log(menu.entries());
+ //OPTIONAL CHAINING...
+
+// console.log(restaurant.openHours.mon?.open); //undefine
+// console.log(restaurant.openHours?.mon?.open); //undefine
+// console.log(restaurant.openHours.sat?.open); // 0
+
+// //alternet by if/else condition...
+// if (restaurant.openHours && restaurant.openHours.mon)
+//   console.log(restaurant.openHours.mon.open);
+
+// const days = ["mon", "tue", "wed", "thur", "fri", "sat", "sun"];
+
+// for (const day of days) {
+//   console.log(day);
+//   const opn = restaurant.openHours[day]?.open ?? "not at all"; //nullis operater
+//   console.log(`on ${day} is hotel open for ${opn}`);
+// }
+
+// //method..
+// console.log(restaurant.order?.(0,1) ?? 'method does not exist');
+// console.log(restaurant.orderRisato?.(0, 1) ?? 'method does not exist'); //method does not exist 
+
+// //array..
+// const user = [
+//   {
+//     name: "heett",
+//     mail: "patel@het.io",
+//   },
+// ];
+// const users = []
+// console.log(user[0]?.name ?? 'user arraya empty');
+// console.log(users[0]?.name ?? 'user arraya empty'); //user array empty...
+// // const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// // console.log(menu);
+
+// // for (const i of menu) console.log(i);
+
+// // for (const [i, el] of menu.entries()) {
+// //   console.log(`${i + 1} : ${el}`)
+// // }
+
+// console.log(menu.entries);
+// console.log(menu.entries());
 
 // // restaurant.orderPizza('paneer - onion', 'oragano', 'tomato', 'catchup');
 // // //spreading with rest....
@@ -83,7 +135,6 @@ console.log(menu.entries());
 // // const n = [84, 84, 48, 48];
 // // display(...n);
 
-
 // // const extra = [prompt('1st item'), prompt('2nd item'), prompt('3rd item')];
 
 // // restaurant.orderExtra(...extra);
@@ -98,13 +149,12 @@ console.log(menu.entries());
 // });
 
 // restaurant.orderDelivery({
-    
+
 //     adress: 'gandhinagar,skps. sct : 12',
 //     nam: 'hett',
 //     mainIndex: 1,
 //     starterIndex: 2,
 // }); */
-  
 
 // // const arr = [1, 2, 3];
 // // const [a, b, c] = arr;
@@ -188,39 +238,39 @@ console.log(menu.entries());
 // console.log(add || 8);
 // console.log(add ?? 8);  //it consider value of add as a value not an falsy value..
 const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
+  team1: "Bayern Munich",
+  team2: "Borrussia Dortmund",
   players: [
     [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
+      "Neuer",
+      "Pavard",
+      "Martinez",
+      "Alaba",
+      "Davies",
+      "Kimmich",
+      "Goretzka",
+      "Coman",
+      "Muller",
+      "Gnarby",
+      "Lewandowski",
     ],
     [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
+      "Burki",
+      "Schulz",
+      "Hummels",
+      "Akanji",
+      "Hakimi",
+      "Weigl",
+      "Witsel",
+      "Hazard",
+      "Brandt",
+      "Sancho",
+      "Gotze",
     ],
   ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
+  score: "4:0",
+  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
+  date: "Nov 9th, 2037",
   odds: {
     team1: 1.33,
     x: 3.25,
@@ -280,4 +330,3 @@ GOOD LUCK 😀
 
 // //7.
 // team1 < team2 && console.log('team 1 is more likely to win..');
-
