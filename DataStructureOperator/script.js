@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 // const weekdays = ["mon", "tue", "wed", "thur", "fri", "sat", "sun"];
 
@@ -69,10 +69,12 @@ const getCode = str => str.slice(0, 3).toUpperCase();
 
 for (const flight of flights.split('+')) {
   const [type, from, to, time] = flight.split(';');
-  const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll('_',' ')}${getCode(from)} ${getCode(to)} (${time.replace(':', 'h')})`.padStart(36);
+  const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll(
+    '_',
+    ' '
+  )}${getCode(from)} ${getCode(to)} (${time.replace(':', 'h')})`.padStart(36);
   console.log(output);
 }
-
 
 //Slice method...
 // const airline = (seat) => {
@@ -552,24 +554,24 @@ Afterwards, test with your own test data!
 GOOD LUCK 😀
 */
 
-document.body.append(document.createElement("textarea"));
-document.body.append(document.createElement("button"));
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
 
-document.querySelector("button").addEventListener("click", function () {
-  const text = document.querySelector("textarea").value;
-  const arr = text.split("\n");
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const arr = text.split('\n');
   let count = 1;
   for (const word of arr) {
     let i = 0;
     const trimed = word.trim();
-    const modified = trimed.toLowerCase().split("_");
+    const modified = trimed.toLowerCase().split('_');
     const final = [
       modified[i],
       modified[i + 1].slice(0, 1).toUpperCase(),
       modified[i + 1].slice(1),
-    ].join("");
+    ].join('');
 
-    console.log(final.padEnd(17, " "), "✅".repeat(count));
+    console.log(final.padEnd(17, ' '), '✅'.repeat(count));
     count++;
   }
 });
