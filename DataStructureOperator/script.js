@@ -1,84 +1,165 @@
 "use strict";
 
-const weekdays = ["mon", "tue", "wed", "thur", "fri", "sat", "sun"];
+// const weekdays = ["mon", "tue", "wed", "thur", "fri", "sat", "sun"];
 
-const openHours = {
-  [weekdays[3]]: {
-    //it is work as thursday...
-    open: 12,
-    close: 12,
-  },
+// const openHours = {
+//   [weekdays[3]]: {
+//     //it is work as thursday...
+//     open: 12,
+//     close: 12,
+//   },
 
-  fri: {
-    open: 11,
-    close: 13,
-  },
-  sat: {
-    open: 0,
-    close: 24,
-  },
-};
+//   fri: {
+//     open: 11,
+//     close: 13,
+//   },
+//   sat: {
+//     open: 0,
+//     close: 24,
+//   },
+// };
 
-const restaurant = {
-  name: "Classico Italiano",
-  location: "Via Angelo Tavanti 23, Firenze, Italy",
-  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
-  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
-  mainMenu: ["Pizza", "Pasta", "Risotto"],
+// const restaurant = {
+//   name: "Classico Italiano",
+//   location: "Via Angelo Tavanti 23, Firenze, Italy",
+//   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+//   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+//   mainMenu: ["Pizza", "Pasta", "Risotto"],
 
-  //ES6 enhancedobject literal
-  openHours,
+//   //ES6 enhancedobject literal
+//   openHours,
 
-  order(starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-  },
+//   order(starterIndex, mainIndex) {
+//     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+//   },
 
-  orderDelivery: function ({
-    time = "9:00",
-    adress,
-    nam,
-    mainIndex,
-    starterIndex,
-  }) {
-    console.log(
-      `${nam} ,your order ${this.starterMenu[starterIndex]} & ${this.mainMenu[mainIndex]}is recieved at ${adress} on precisely ${time}. Thank You ! `
-    );
-  },
-  //it is also accesable...
-  orderExtra(ex1, ex2, ex3) {
-    console.log(`here your extra item with dish; ${ex1},${ex2},${ex3}`);
-  },
+//   orderDelivery: function ({
+//     time = "9:00",
+//     adress,
+//     nam,
+//     mainIndex,
+//     starterIndex,
+//   }) {
+//     console.log(
+//       `${nam} ,your order ${this.starterMenu[starterIndex]} & ${this.mainMenu[mainIndex]}is recieved at ${adress} on precisely ${time}. Thank You ! `
+//     );
+//   },
+//   //it is also accesable...
+//   orderExtra(ex1, ex2, ex3) {
+//     console.log(`here your extra item with dish; ${ex1},${ex2},${ex3}`);
+//   },
 
-  orderPizza: function (mainIng, ...otherIng) {
-    console.log(mainIng);
-    console.log(otherIng);
-  },
-};
+//   orderPizza: function (mainIng, ...otherIng) {
+//     console.log(mainIng);
+//     console.log(otherIng);
+//   },
+// };
+
+// String Methods Practice
+
+const flights =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
+
+const getCode = str => str.slice(0, 3).toUpperCase();
+
+for (const flight of flights.split('+')) {
+  const [type, from, to, time] = flight.split(';');
+  const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll('_',' ')}${getCode(from)} ${getCode(to)} (${time.replace(':', 'h')})`.padStart(36);
+  console.log(output);
+}
+
+
+//Slice method...
+// const airline = (seat) => {
+//   console.log(
+//     seat.slice(0,1) === 'm' ? 'middle' : 'uper class');
+//     console.log(seat.slice(0,1));
+// }
+// airline('m18');
+// airline('c18');
+
+// //Replacing...
+// const str0 = 'hey hello heyy hello why bye why';
+// console.log(str0.replace(/hello/g,'hii'));  // /.../g is for global search..
+
+// //split & name...
+// const str1 = 'hey+hello+greet+bye+tata'.split('+');
+// console.log(str1); //['hey', 'hello', 'greet', 'bye', 'tata']
+// console.log(str1[0]); //hey
+// for (const n of str1) {
+//   console.log(n[0]); //h,h,g,b,t
+// }
+// console.log('hey bye tata'.split(' ')); //['hey', 'bye', 'tata']
+
+// const [fname, lname] = 'het varsada'.split(' ');
+// const newname = ['mr', `${fname}${lname}`].join(' ');
+// console.log(newname);
+
+// const nameCapatilization = function (str) {
+//   const name = str.split(" ");
+//   const wordArr = [];
+
+//   for (const n of name) {
+//     // wordArr.push(n[0].toUpperCase() + n.slice(1));
+//     //OR...
+//     wordArr.push(n.replace(n[0], n[0].toUpperCase()));
+//   }
+//   // console.log(String(wordArr).replace(/,/g,' '));
+//   //OR...
+//   console.log(wordArr.join(" "));
+// };
+// nameCapatilization("hey my name is het what's yours?");
+
+//Padding...
+// const debbitcardNum = function (num) {
+//   let show = num.slice(-4);
+//   const mask = show.padStart(num.length, 'x');
+//   console.log(mask); //xxxxxxxx1235 & xxxxxx2832
+//  }
+// debbitcardNum('145115781235');
+// debbitcardNum('7984842832');
+
+//Repeat...
+// const str2 = 'h' + 'i';
+// const modified = str2[0] + str2[1].repeat(15);
+// console.log(modified);
 
 //making Map..
-const rest = new Map();
-rest.set("name", "subh hotel"); //add key and value...
-rest
-  .set("menu", ["Italian", "Pizzeria", "Vegetarian", "Organic"])
-  .set("open", 11)
-  .set("close", 23)
-  .set(true, "we are opened")
-  .set(false, "we are closed"); //this is also way of add key and element by chaining
+// const rest = new Map();
+// rest.set("name", "subh hotel"); //add key and value...
+// rest
+//   .set("menu", ["Italian", "Pizzeria", "Vegetarian", "Organic"])
+//   .set("open", 11)
+//   .set("close", 23)
+//   .set(true, "we are opened")
+//   .set(false, "we are closed"); //this is also way of add key and element by chaining
 
-console.log(rest);
-console.log(rest.set("food", ["pizza", "dal-bhat", "dal-fry"])); //it will not give only this key and value but all included data will be given in console...
+// console.log(rest);
+// console.log(rest.set("food", ["pizza", "dal-bhat", "dal-fry"])); //it will not give only this key and value but all included data will be given in console...
 
-console.log(rest.get("name")); //subh hotel...
-const time = 10;
-console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
+// console.log(rest.get("name")); //subh hotel...
+// const time = 10;
+// console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
 
-//array as map key...
-const arr = [1, 2];
-rest.set(arr, "test");
-rest.set([4.8], "test0");
-console.log(rest.get(arr)); //test..
-// console.log(rest.get([4,8])); //it can be access becuase of both key is different place in heap it can be as key...
-console.log(rest.get(4)); //it also undefine
+// //array as map key...
+// const arr = [1, 2];
+// rest.set(arr, "test");
+// rest.set([4.8], "test0");
+// console.log(rest.get(arr)); //test..
+// // console.log(rest.get([4,8])); //it can be access becuase of both key is different place in heap it can be as key...
+// console.log(rest.get(4)); //it also undefine
+
+//Sets....it has no index and it gives ever unique elements and there is no way get out data from it and its order is not not relavent...
+// const orderset = new Set(["hett", "vb", "krish", "sarang"]);
+// const orderset2 = ["hett", "vb", "krish"];
+// console.log(orderset);
+// console.log(...orderset); //strings
+// console.log(...new Set(orderset2));
 
 //key ,value, entry...
 // const k = Object.keys(openHours);
@@ -263,46 +344,46 @@ console.log(rest.get(4)); //it also undefine
 // const add = 0;
 // console.log(add || 8);
 // console.log(add ?? 8);  //it consider value of add as a value not an falsy value..
-const game = {
-  team1: "Bayern Munich",
-  team2: "Borrussia Dortmund",
-  players: [
-    [
-      "Neuer",
-      "Pavard",
-      "Martinez",
-      "Alaba",
-      "Davies",
-      "Kimmich",
-      "Goretzka",
-      "Coman",
-      "Muller",
-      "Gnarby",
-      "Lewandowski",
-    ],
-    [
-      "Burki",
-      "Schulz",
-      "Hummels",
-      "Akanji",
-      "Hakimi",
-      "Weigl",
-      "Witsel",
-      "Hazard",
-      "Brandt",
-      "Sancho",
-      "Gotze",
-    ],
-  ],
-  score: "4:0",
-  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
-  date: "Nov 9th, 2037",
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
+// const game = {
+//   team1: "Bayern Munich",
+//   team2: "Borrussia Dortmund",
+//   players: [
+//     [
+//       "Neuer",
+//       "Pavard",
+//       "Martinez",
+//       "Alaba",
+//       "Davies",
+//       "Kimmich",
+//       "Goretzka",
+//       "Coman",
+//       "Muller",
+//       "Gnarby",
+//       "Lewandowski",
+//     ],
+//     [
+//       "Burki",
+//       "Schulz",
+//       "Hummels",
+//       "Akanji",
+//       "Hakimi",
+//       "Weigl",
+//       "Witsel",
+//       "Hazard",
+//       "Brandt",
+//       "Sancho",
+//       "Gotze",
+//     ],
+//   ],
+//   score: "4:0",
+//   scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
+//   date: "Nov 9th, 2037",
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
 
 /* CHALLENGE - 1...
 We're building a football betting app (soccer for my American friends 😅)!
@@ -399,9 +480,114 @@ GOOD LUCK 😀
 //   console.log(`odd ${str} ${odd}`);
 // }
 
-//Sets....it has no index and it gives ever unique elements and there is no way get out data from it and its order is not not relavent...
-// const orderset = new Set(["hett", "vb", "krish", "sarang"]);
-// const orderset2 = ["hett", "vb", "krish"];
-// console.log(orderset);
-// console.log(...orderset); //strings
-// console.log(...new Set(orderset2));
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+GOOD LUCK 😀
+*/
+
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
+
+// //1.
+// const events = new Set(gameEvents.values());
+// console.log(events);
+
+// //2.
+// gameEvents.delete(64);
+// console.log(gameEvents);
+
+// //3.
+// console.log(
+//   `An event happened, on average, every ${90 / gameEvents.size} minutes`
+// );
+// const time = [...gameEvents.keys()].pop();
+// console.log(time);
+// console.log(
+//   `An event happened, on average, every ${time / gameEvents.size} minutes`
+// );
+
+// // 4.
+// for (const [min, event] of gameEvents) {
+//   const half = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`[${half} HALF] ${min}: ${event}`);
+// }
+
+// CHALLENGE - 4...
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+Afterwards, test with your own test data!
+GOOD LUCK 😀
+*/
+
+document.body.append(document.createElement("textarea"));
+document.body.append(document.createElement("button"));
+
+document.querySelector("button").addEventListener("click", function () {
+  const text = document.querySelector("textarea").value;
+  const arr = text.split("\n");
+  let count = 1;
+  for (const word of arr) {
+    let i = 0;
+    const trimed = word.trim();
+    const modified = trimed.toLowerCase().split("_");
+    const final = [
+      modified[i],
+      modified[i + 1].slice(0, 1).toUpperCase(),
+      modified[i + 1].slice(1),
+    ].join("");
+
+    console.log(final.padEnd(17, " "), "✅".repeat(count));
+    count++;
+  }
+});
+
+//sir's Code...
+/*
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+  for (const [i, row] of rows.entries()) {
+    const [first, second] = row.toLowerCase().trim().split('_');
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
+  }
+});
+*/
