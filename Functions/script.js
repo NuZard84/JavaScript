@@ -10,7 +10,7 @@
 //     passenger,
 //     cost,
 //     };
-    
+
 //     bookings.push(booking);
 //     console.log(booking);
 // };
@@ -55,7 +55,7 @@
 // }
 //higher order function...
 // const transform = function (str, fun) {
-    
+
 //     console.log(`original: ${str}`);
 //     console.log(`transformed: ${fun(str)}`);
 // }
@@ -88,53 +88,150 @@
 //OR...
 
 // const greet = greeting => name => console.log(`${greeting} ${name}`);
-// greet('hey')('het'); 
+// greet('hey')('het');
 
-const airIndia = {
-    airline: 'airIndia',
-    iataCode: 'ARI',
-    booking: [],
-    // book: function(){}
-    book(name, flighnum) {
-        console.log(`${name} booked seat on ${this.airline}, seat number: ${this.iataCode}${flighnum}`);
-        this.booking.push({fligh: `${this.iataCode}${flighnum}`,name})
-    }
-}
+// const airIndia = {
+//   airline: 'airIndia',
+//   iataCode: 'ARI',
+//   booking: [],
+//   // book: function(){}
+//   book(flighnum, name) {
+//     console.log(
+//       `${name} booked seat on ${this.airline}, seat number: ${this.iataCode}${flighnum}`
+//     );
+//     this.booking.push({ fligh: `${this.iataCode}${flighnum}`, name });
+//   },
+// };
 
 // airIndia.book('het', '84');
 // airIndia.book('krish', '48');
 // console.log(airIndia);
 
-const eurowings = {
-    airline: 'eurowings',
-    iataCode: 'EWR',
-    booking: [],
-};
+// const eurowings = {
+//   airline: 'eurowings',
+//   iataCode: 'EWR',
+//   booking: [],
+// };
 
-const swiss = {
-    airline: 'Swiss',
-    iataCode: 'SWS',
-    booking: [],
-};
+// const swiss = {
+//   airline: 'Swiss',
+//   iataCode: 'SWS',
+//   booking: [],
+// };
 
-const book = airIndia.book;
+// const book = airIndia.book;
 
 //it is not working beacuase in regular function 'this' keyword is directly use as undefined...
 // book(23, 'Nishchit');
 
-book.call(eurowings, 'Nishchit', 48);
-console.log(eurowings);
+// book.call(eurowings, 'Nishchit', 48);
+// console.log(eurowings);
 
-book.call(airIndia, 'HEt', 84);
-console.log(airIndia);
+// book.call(airIndia, 'HEt', 84);
+// console.log(airIndia);
 
-book.call(swiss, 'vb', 96);
-console.log(swiss);
+// book.call(swiss, 'vb', 96);
+// console.log(swiss);
 
-//Apply method..
-const flightData = [848, 'hett'];
-book.apply(swiss, flightData);
-console.log(swiss);
-//OR...
-book.call(swiss, ...flightData);
-console.log(swiss);
+// //Apply method..
+// const flightData = [848, 'hett'];
+// book.apply(swiss, flightData);
+// console.log(swiss);
+// //OR...
+// book.call(swiss, ...flightData);
+// console.log(swiss);
+
+//Bind method...
+// const bookARI = book.bind(airIndia); //here first parameter is always work as 'this' keyword...
+// bookARI('hett', 84);
+
+//now for fixed seat number..arguments in bind
+// const bookSWS48 = book.bind(swiss,...[,,] ); //it is use for assigne undefine to arguments at once...
+
+// const bookSWS48 = book.bind(swiss, 48);
+// bookSWS48('nishchit');
+
+// airIndia.plane = 101;
+// airIndia.buyplane = function () {
+//   console.log(this); //"this" = point to class '.buy'...
+//   this.plane++;
+//   console.log(this.plane); //it has no wxistence...
+// };
+
+// document
+//   .querySelector('.buy')
+//   .addEventListener('click', airIndia.buyplane.bind(airIndia)); //worked...
+
+// //partial apllication...
+// const addTax = (rate, value) => value = value * rate;
+
+// console.log(addTax(0.1, 45));
+// const addVAT = addTax.bind(null, 0.1); //'this = null... & rate = 0.1 is fixed...
+// console.log(addVAT(45)); //45
+// //const addTax = value => value = value * 0.1;
+
+// const addTax = function (rate) {
+//     return function (value) {
+//         return value * rate;
+//     }
+// }
+// console.log(addTax(0.1)(45));
+
+//challenge-1...
+/*
+Let's build a simple poll app!
+A poll has a question, an array of options from which people can choose, and an array with the number of replies for each option. This data is stored in the starter object below.
+Here are your tasks:
+1. Create a method called 'registerNewAnswer' on the 'poll' object. The method does 2 things:
+  1.1. Display a prompt window for the user to input the number of the selected option. The prompt should look like this:
+        What is your favourite programming language?
+        0: JavaScript
+        1: Python
+        2: Rust
+        3: C++
+        (Write option number)
+  
+  1.2. Based on the input number, update the answers array. For example, if the option is 3, increase the value AT POSITION 3 of the array by 1. Make sure to check if the input is a number and if the number makes sense (e.g answer 52 wouldn't make sense, right?)
+2. Call this method whenever the user clicks the "Answer poll" button.
+3. Create a method 'displayResults' which displays the poll results. The method takes a string as an input (called 'type'), which can be either 'string' or 'array'. If type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like "Poll results are 13, 2, 4, 1". 
+4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
+HINT: Use many of the tools you learned about in this and the last section 😉
+BONUS: Use the 'displayResults' method to display the 2 arrays in the test data. Use both the 'array' and the 'string' option. Do NOT put the arrays in the poll object! So what shoud the this keyword look like in this situation?
+BONUS TEST DATA 1: [5, 2, 3]
+BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
+GOOD LUCK 😀 */
+
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  // This generates [0, 0, 0, 0]. More in the next section 😃
+  answers: new Array(4).fill(0), //made array of [0,0,0,0]
+
+  registerNewAnswer() {
+    const answer = Number(
+      prompt(`${this.poll}\n${this.options.join('\n')}\n(write option number)`)
+    );
+   
+    typeof answer === 'number' && answer < this.answers.length && this.answers[answer]++;
+   
+
+    this.displayResult();
+    this.displayResult('string');
+  
+  },
+
+  displayResult(type = 'array') {
+    if (type === 'array') {
+      console.log(this.answers);
+    }
+    else if (type === 'string') {
+      //reult are 12,14,18,5
+      console.log(`poll result :${this.answers.join(', ')}`);
+    }
+  }
+};
+document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+//for bonus question..
+poll.displayResult.call({answers:[0,0,0]},'string')
+console.log(poll);
