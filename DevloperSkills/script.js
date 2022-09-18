@@ -47,5 +47,8 @@ const func = arr => {
   return x;
 };
 
-console.log(func(testData1));
-console.log(func(testData2));
+console.log( func(testData1) );
+console.log( func(testData2) );
+
+
+

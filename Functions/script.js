@@ -265,40 +265,55 @@ GOOD LUCK 😀 */
 // booker();
 // booker();
 
-// let f;
+let f;
 
-// const g = function () {
-//   const a = 20;
-//   f = function () {
-//     console.log(a * 2);
-//   };
-// };
+const g = function () {
+  const a = 20;
+  f = function () {
+    console.log(a * 2);
+  };
+};
 
-// const h = function () {
-//   const b = 30;
-//   f = function () {
-//     console.log(b*2);
-//   }
-// }
+let flag = false;
 
-// g();
-// f(); //40
-// console.dir(f);
+const hello = () => {
+  console.log('hello once again');
+};
+
+const onlyOnce = () => {
+  console.log('called...');
+
+  if (!flag) {
+    hello();
+    flag = true;
+  }
+};
+
+const h = function () {
+  const b = 30;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f(); //40
+console.dir(f);
 
 // h();
 // f(); //60
 // console.dir(f); //to get information of closure environment..
 
 // const boardPassenger = function (n,wait) {
-  
-  // const perGroup = n / 3; //it is in vairable environment in closure function..so its first priority..
-  
-  // setTimeout(function () {  //it is individual function...
-  //   console.log(`we are boring ${n}`);
-  //   console.log(`there are 3 groups, each with ${perGroup} passenger`);
-  // }, wait * 1000);
-  
-  // console.log(`will start boarding in ${wait} second`);
+
+// const perGroup = n / 3; //it is in vairable environment in closure function..so its first priority..
+
+// setTimeout(function () {  //it is individual function...
+//   console.log(`we are boring ${n}`);
+//   console.log(`there are 3 groups, each with ${perGroup} passenger`);
+// }, wait * 1000);
+
+// console.log(`will start boarding in ${wait} second`);
 // }
 // const perGroup = 120;  //this global scop but clouser is priority in scope chain so it will be ingnored
 // boardPassenger(180, 3);
@@ -316,9 +331,6 @@ GOOD LUCK 😀 */
   const header = document.querySelector('h1');
   header.style.color = 'red';
   document.querySelector('body').addEventListener('click', function () {
-
     header.style.color = ' blue';
   });
 })();
-
-
