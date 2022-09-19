@@ -20,8 +20,6 @@ const arr0 = [1, 2, 3, 4, 5];
 // console.log(arr0); //1,2
 // console.log(arr0.splice(2, 2, 'a')); //add a at possition -2 and extracte 2 elements from that position to right direction...extracted : 3,4
 // console.log(arr0); //1,2,'a',5
-// console.log(arr.splice(-1,-4)); //it is empty by some reason...
+// console.log(arr.splice(-1,-4)); //it is empty by some reason..
 
 //
-
-console.log('het usjsdd');
