@@ -1,25 +1,65 @@
 'using strict';
 
-const arr = ['a', 'b', 'c', 'd', 'e'];
-const arr0 = [1, 2, 3, 4, 5];
-//Slice...
+const acc1 = {
+  owner: 'het varasada',
+  username: 'hett',
+  pin: 0849,
+  intrestRate: 0.84, //%
+  movements: [],
+};
 
-// console.log(arr.slice(-3)); //last element...e
-// console.log(arr.slice(1, 4)); //b,c,d,e
-// console.log(arr.slice(3)); //d,e
-// console.log(arr.slice(1, -2)); //b,c
+const acc2 = {
+  owner: 'vaibhav sanepra',
+  pin: 2003,
+  intrestRate: 0.9, //%
+  movements: [],
+};
 
-//Splice...
-//it is extracted element which is selected and rest of element can be print by console
-//Note: splice take also last value ...
+const acc3 = {
+  owner: 'nishchit malasna',
+  pin: 9648,
+  intrestRate: 1.2, //%
+  movements: [],
+};
 
-//ignore simultaneous calls...
+const acc4 = {
+  owner: 'krish chaniyara',
+  pin: 1111,
+  intrestRate: 1, //%
+  movements: [],
+};
 
-// console.log(arr0.splice(1)); //extracted 1...2,3,4,5
-// console.log(arr0.splice(-3)); //extracted 1,2...3,4,5
-// console.log(arr0); //1,2
-// console.log(arr0.splice(2, 2, 'a')); //add a at possition -2 and extracte 2 elements from that position to right direction...extracted : 3,4
-// console.log(arr0); //1,2,'a',5
-// console.log(arr.splice(-1,-4)); //it is empty by some reason..
+const accounts = [acc1, acc2, acc3, acc4];
 
-//
+//DOM..
+const wlcm = document.querySelector('.welcome');
+const labelDate = document.querySelector('.date');
+const labelValue = document.querySelector('.balance__value');
+const labelSumIn = document.querySelector('.summary__value--in');
+const labelSumOut = document.querySelector('.summary__value--out');
+const labelSumIntrest = document.querySelector('.summary__value--interest');
+const lableTimer = document.querySelector('.timer');
+const containerApp = document.querySelector('.app');
+const containerMovement = document.querySelector('.movement');
+
+//buttons..
+const btnLogin = document.querySelector('.login__btn');
+const btnTransfer = document.querySelector('.form__btn--tranfer');
+const btnForLoan = document.querySelector('.form__btn--loan');
+const btnClose = document.querySelector('.form__btn--close');
+const btnSort = document.querySelector('.btn--sort');
+
+//input..
+const inputLoginUsername = document.querySelector('.login__input--user');
+const inputLoginPin = document.querySelector('.login__input--pin');
+const inputTransferTo = document.querySelector('.form__input--to');
+const inputTransferAmount = document.querySelector('.form__input--amount');
+const inputLoanAmount = document.querySelector('.form__input--loan-amount');
+const inputCloseUsername = document.querySelector('.form__input--user');
+const inputClosePin = document.querySelector('.form__input--pin');
+
+//logics..
+
+btnLogin.addEventListener('click', function () {
+  inputLoginPin === acc1.pin ? console.log('loged in' : console.log('wrong pass'););
+});
