@@ -61,5 +61,5 @@ const inputClosePin = document.querySelector('.form__input--pin');
 //logics..
 
 btnLogin.addEventListener('click', function () {
-  inputLoginPin === acc1.pin ? console.log('loged in' : console.log('wrong pass'););
+  inputLoginPin === acc1.pin ? console.log('loged in') : console.log('wrong pass');
 });
