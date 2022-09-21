@@ -70,7 +70,7 @@ const displayMovements = function (m) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${Math.abs(mov)}€</div>
+        <div class="movements__value">${Math.abs(mov)}$</div>
       </div>
     `;
 
