@@ -3,30 +3,30 @@
 const acc1 = {
   owner: 'het varasada',
   username: 'hett',
-  pin: 0849,
+  pin: '0849',
   intrestRate: 0.84, //%
-  movements: [],
+  movements: [1000, -1399, -45, 1400, -849, 1499, 2000, -1279],
 };
 
 const acc2 = {
   owner: 'vaibhav sanepra',
-  pin: 2003,
+  pin: '2003',
   intrestRate: 0.9, //%
-  movements: [],
+  movements: [-1040, 1199, -450, 240, -2049, 1699, 2200, -1090],
 };
 
 const acc3 = {
   owner: 'nishchit malasna',
-  pin: 9648,
+  pin: '9648',
   intrestRate: 1.2, //%
-  movements: [],
+  movements: [899, 1100, -450, -789, -849, 1150, 350, -1099],
 };
 
 const acc4 = {
   owner: 'krish chaniyara',
-  pin: 1111,
+  pin: '1111',
   intrestRate: 1, //%
-  movements: [],
+  movements: [-499, -1779, -450, 1299, 500, -999, -1500, 2500],
 };
 
 const accounts = [acc1, acc2, acc3, acc4];
@@ -40,7 +40,7 @@ const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumIntrest = document.querySelector('.summary__value--interest');
 const lableTimer = document.querySelector('.timer');
 const containerApp = document.querySelector('.app');
-const containerMovement = document.querySelector('.movement');
+const containerMovements = document.querySelector('.movements');
 
 //buttons..
 const btnLogin = document.querySelector('.login__btn');
@@ -60,6 +60,22 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 //logics..
 
-btnLogin.addEventListener('click', function () {
-  inputLoginPin === acc1.pin ? console.log('loged in') : console.log('wrong pass');
-});
+const displayMovements = function (m) {
+  containerMovements.innerHTML = '';
+  m.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+        <div class="movements__value">${Math.abs(mov)}€</div>
+      </div>
+    `;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(acc4.movements);
