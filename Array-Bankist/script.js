@@ -79,3 +79,4 @@ const displayMovements = function (m) {
 };
 
 displayMovements(acc4.movements);
+

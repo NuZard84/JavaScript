@@ -1,0 +1,7 @@
+1 eur = 
+0.984897(value) usd
+
+1eur = 79.743633 inr
+
+1 usd = 1/value * 79.743633inr
+1 usd = 1/value eur

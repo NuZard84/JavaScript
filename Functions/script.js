@@ -54,14 +54,13 @@
 //     return [first.toUpperCase(), ...other].join(' ');
 // }
 //higher order function...
-// const transform = function (str, fun) {
+const transform = function (str, fun) {
+  console.log(`original: ${str}`);
+  console.log(`transformed: ${fun(str)}`);
+};
 
-//     console.log(`original: ${str}`);
-//     console.log(`transformed: ${fun(str)}`);
-// }
-
-// transform('my name is het varasada whats yours', firstUppercase);
-// transform('my name is het varasada whats yours', oneWord);
+transform('my name is het varasada whats yours', firstUppercase);
+transform('my name is het varasada whats yours', oneWord);
 
 // const laugh = function () {
 //     console.log('😂');
@@ -75,20 +74,20 @@
 //         console.log(`${greeting} ${name}`);
 //     }
 // }
-// const greets = greet('hello'); //greets = function(name) ..greeting = 'hello'
-// greets('het'); // name = 'het'...display : hello het..
-// greets('vb');
-// greet('hey')('het'); //alternet way of callback function
+const greets = greet('hello'); //greets = function(name) ..greeting = 'hello'
+greets('het'); // name = 'het'...display : hello het..
+greets('vb');
+greet('hey')('het'); //alternet way of callback function
 
-//airow function..
+// airow function..
 // const greet = (greeting) => function (name) {
 //     console.log(`${greeting} ${name}`);
 // }
 
-//OR...
+// OR...
 
-// const greet = greeting => name => console.log(`${greeting} ${name}`);
-// greet('hey')('het');
+const greet = greeting => name => console.log(`${greeting} ${name}`);
+greet('hey')('het');
 
 // const airIndia = {
 //   airline: 'airIndia',
@@ -265,40 +264,40 @@ GOOD LUCK 😀 */
 // booker();
 // booker();
 
-let f;
+// let f;
 
-const g = function () {
-  const a = 20;
-  f = function () {
-    console.log(a * 2);
-  };
-};
+// const g = function () {
+//   const a = 20;
+//   f = function () {
+//     console.log(a * 2);
+//   };
+// };
 
-let flag = false;
+// let flag = false;
 
-const hello = () => {
-  console.log('hello once again');
-};
+// const hello = () => {
+//   console.log('hello once again');
+// };
 
-const onlyOnce = () => {
-  console.log('called...');
+// const onlyOnce = () => {
+//   console.log('called...');
 
-  if (!flag) {
-    hello();
-    flag = true;
-  }
-};
+//   if (!flag) {
+//     hello();
+//     flag = true;
+//   }
+// };
 
-const h = function () {
-  const b = 30;
-  f = function () {
-    console.log(b * 2);
-  };
-};
+// const h = function () {
+//   const b = 30;
+//   f = function () {
+//     console.log(b * 2);
+//   };
+// };
 
-g();
-f(); //40
-console.dir(f);
+// g();
+// f(); //40
+// console.dir(f);
 
 // h();
 // f(); //60
@@ -327,10 +326,10 @@ Take the IIFE below and at the end of the function, attach an event listener tha
 And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
 GOOD LUCK 😀 */
 
-(function () {
-  const header = document.querySelector('h1');
-  header.style.color = 'red';
-  document.querySelector('body').addEventListener('click', function () {
-    header.style.color = ' blue';
-  });
-})();
+// (function () {
+//   const header = document.querySelector('h1');
+//   header.style.color = 'red';
+//   document.querySelector('body').addEventListener('click', function () {
+//     header.style.color = ' blue';
+//   });
+// })();

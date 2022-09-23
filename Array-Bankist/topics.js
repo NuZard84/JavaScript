@@ -108,18 +108,42 @@ GOOD LUCK 😀
 // cheackDogs(juliaDogs2, kateDogs2);
 
 //API...
+const x = function (params) {
+  console.log(params);
+}
 
-// let url = 'https://api.apilayer.com/currency_data/live?apikey=BuLIFNvO559TP45qacw6vYLgqoEOKkLO';
-// fetch(url)
-//     .then((Response) => {
-//         const content = Response.json();
-//         return content;
-//     })
-//     .then((data) => {
-//         console.log(data);
-//         let ind = data.quotes.USDINR;
-//         console.log(ind);
+function api(obj) {
+  const url = 'https://currency-conversion-and-exchange-rates.p.rapidapi.com/latest?';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '15963e6d4amsh46c094be6d69d40p1b1845jsna74dcd990851',
+      'X-RapidAPI-Host': 'currency-conversion-and-exchange-rates.p.rapidapi.com'
+    }
+  };
 
-//     })
+  fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+      var a = [{}];
+      a.push([{"EURtoUSD": String(data.rates.USD), "EURtoINR": String(data.rates.INR)}]);
+      console.log(a);
+      obj(a);
+    })
+  
+}
+console.log(api(x));
 
-//The MAP mathod...
+
+
+
+
+  //   function abs(handler) {
+  //     fetch('https://jsonplaceholder.typicode.com/todos/1')
+  //     .then(res => {return res.json()})
+  //     .then(data => {
+  //         var a = [];
+  //         a.push(data);
+  //         handler(a);
+  //     });
+  // } EURtoUSD: data.rates.USD, EURtoINR: data.rates.INR
