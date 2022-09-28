@@ -108,42 +108,158 @@ GOOD LUCK 😀
 // cheackDogs(juliaDogs2, kateDogs2);
 
 //API...
-const x = function (params) {
-  console.log(params);
-}
 
-function api(obj) {
-  const url = 'https://currency-conversion-and-exchange-rates.p.rapidapi.com/latest?';
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': '15963e6d4amsh46c094be6d69d40p1b1845jsna74dcd990851',
-      'X-RapidAPI-Host': 'currency-conversion-and-exchange-rates.p.rapidapi.com'
-    }
-  };
+// let ob = Array();
+// const x = function (params) {
+//   console.log(params.get('eurtousd'));
+// };
 
-  fetch(url, options)
-    .then(response => response.json())
-    .then(data => {
-      var a = [{}];
-      a.push([{"EURtoUSD": String(data.rates.USD), "EURtoINR": String(data.rates.INR)}]);
-      console.log(a);
-      obj(a);
-    })
-  
-}
-console.log(api(x));
+// function api(obj) {
+//   const url =
+//     'https://currency-conversion-and-exchange-rates.p.rapidapi.com/latest?';
+//   const options = {
+//     method: 'GET',
+//     headers: {
+//       'X-RapidAPI-Key': '15963e6d4amsh46c094be6d69d40p1b1845jsna74dcd990851',
+//       'X-RapidAPI-Host':
+//         'currency-conversion-and-exchange-rates.p.rapidapi.com',
+//     },
+//   };
 
+//   fetch(url, options)
+//     .then(response => response.json())
+//     .then(data => {
+//       var a = new Map();
+//       a.set("eurtousd", String(data.rates.USD)).set(
+//         "eurtoinr",
+//         String(data.rates.INR)
+//       );
 
+//       obj(a);
+//     });
+// }
+// api(x);
 
+//the MAP method ...
+// const arr = ['a', 'b', 'c', 'd', 'e'];
+// const arr0 = [11, -9, 3, 49, -5];
 
+// arr0.forEach(function (num, i, arr) {
+//   if (num % 2 === 0) {
+//     console.log(`${i + 1}: ${Math.abs(num)} is even`);
+//   } else {
+//     console.log(`${i + 1}: ${Math.abs(num)} is odd`);
+//   }
+//   console.log(arr);
+// });
 
-  //   function abs(handler) {
-  //     fetch('https://jsonplaceholder.typicode.com/todos/1')
-  //     .then(res => {return res.json()})
-  //     .then(data => {
-  //         var a = [];
-  //         a.push(data);
-  //         handler(a);
-  //     });
-  // } EURtoUSD: data.rates.USD, EURtoINR: data.rates.INR
+// const map = arr0.map((mov, i) =>
+
+//     `No. ${i + 1} ... ${mov > 0 ? 'deposit' : 'withdrawel'} - ${Math.abs(mov)}`
+// )
+// console.log(map);
+
+// const INRtoUSd = 79;
+// const map0 = arr0.map(mov => mov * INRtoUSd);
+// //OR
+// const emptyArr = [];
+// for (const moves of arr0) emptyArr.push(INRtoUSd * moves);
+
+// console.log(map0);
+// console.log(emptyArr);
+
+//the FILTeR method..
+
+// const arr = ['a', 'b', 'c', 'd', 'e'];
+// const arr0 = [11, -9, 3, 49, -5];
+
+// const deposit = arr0.filter(dep => dep > 0); //11,3,49
+// const deposit = arr0.map(dep => dep > 0); //true,false,true,true,false
+// console.log(deposit);
+
+// //OR..
+
+// const forPush = [];
+// for (const i of arr0) if (i > 0) forPush.push(i);
+// console.log(forPush);
+
+//the REDUCE method..
+
+// const arr = ['a', 'b', 'c', 'd', 'e'];
+// const arr0 = [51, -9, 63, 49, -5];
+
+// const balance = arr0.reduce(function (acc, cur, arr, i) {
+//     console.log(`acc : ${acc}, cur : ${cur}, , arr : ${arr} i : ${i}`);
+//     return acc + cur;
+// }, 0);
+// console.log(balance);
+
+// acc : 0, cur : 11, , arr : 0 i : 11,-9,3,49,-5
+// acc : 11, cur : -9, , arr : 1 i : 11,-9,3,49,-5
+// acc : 2, cur : 3, , arr : 2 i : 11,-9,3,49,-5
+// acc : 5, cur : 49, , arr : 3 i : 11,-9,3,49,-5
+// acc : 54, cur : -5, , arr : 4 i : 11,-9,3,49,-5
+// 49
+
+//find maximum..
+
+// const maximum = arr0.reduce(function (acc, cur) {
+//     console.log(`acc : ${acc} and cur : ${cur}`);
+//     if (acc > cur || acc === cur) return acc;
+//     else return cur;
+// }, arr0[0]);
+
+// console.log(maximum);
+
+// acc : 51 and cur : 51
+// acc : 51 and cur : -9
+// acc : 51 and cur : 63
+// acc : 63 and cur : 49
+// acc : 63 and cur : -5
+// 63
+
+//Challenge - 2...
+
+/* 
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages 😉)
+4. Run the function for both test datasets
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+GOOD LUCK 😀
+*/
+
+const DATA_1 = [5, 2, 4, 1, 15, 8, 3];
+const DATA_2 = [16, 6, 10, 5, 6, 1, 4];
+
+const humanAgeOfData = function (data) {
+  const result = data.map((ele, i) => {
+    if (ele <= 2) return 2 * ele;
+    else return 16 + ele * 4;
+  });
+  return result;
+};
+
+let x2 = humanAgeOfData(DATA_2);
+let x1 = humanAgeOfData(DATA_1);
+
+const filterDogs = function (data) {
+  const filtered = data.filter((ele, i) => {
+    return ele >= 18;
+  });
+
+  const average = filtered.reduce(
+    (acc, cur, i, arr) => acc + cur / arr.length,
+    0
+  );
+
+  console.log('average : ', average);
+
+  return filtered;
+};
+
+console.log(('human age : ', humanAgeOfData(DATA_1)));
+console.log('filtered : ', filterDogs(x2));

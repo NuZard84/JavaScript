@@ -153,6 +153,7 @@ for (const flight of flights.split('+')) {
 // rest.set(arr, "test");
 // rest.set([4.8], "test0");
 // console.log(rest.get(arr)); //test..
+
 // // console.log(rest.get([4,8])); //it can be access becuase of both key is different place in heap it can be as key...
 // console.log(rest.get(4)); //it also undefine
 
@@ -297,11 +298,11 @@ for (const flight of flights.split('+')) {
 // // console.log(l,m,n);
 
 // //mutaning value of object destructer...
-// // let ax = 88;
-// // let bx = 44;
-// // const obj = { ax:1, bx:2, cx:3};
-// // ({ ax,bx } = obj);
-// // console.log(ax, bx);
+let ax = 88;
+let bx = 44;
+const obj = { ax: 1, bx: 2, cx: 3 };
+({ ax, bx } = obj);
+console.log(ax, bx);
 
 // //defualt value of destructer objexct...
 // // const { menu = [], starterMenu: starter = [] } = restaurant;
@@ -319,12 +320,12 @@ for (const flight of flights.split('+')) {
 // // const newArr = [1, 2, ...arr];
 // // console.log(newArr);
 
-// //objects with spreading...
-// // const newRestaurant = { founder: 'unknown', ...restaurant };  //adding new elements in object...
-// // const restaurantCoppy = { ...restaurant };
-// // restaurantCoppy.name = 'lila hotel';
-// // console.log(restaurantCoppy.name); //'lila hotel'...unlikely, here can not change old object elements value beacuse of use of spreading...
-// // console.log(restaurant.name); //'Classico Italiano'
+// objects with spreading...
+// const newRestaurant = { founder: 'unknown', ...restaurant };  //adding new elements in object...
+// const restaurantCoppy = { ...restaurant };
+// restaurantCoppy.name = 'lila hotel';
+// console.log(restaurantCoppy.name); //'lila hotel'...unlikely, here can not change old object elements value beacuse of use of spreading...
+// console.log(restaurant.name); //'Classico Italiano'
 
 // // AND - OR...
 
@@ -554,27 +555,27 @@ Afterwards, test with your own test data!
 GOOD LUCK 😀
 */
 
-document.body.append(document.createElement('textarea'));
-document.body.append(document.createElement('button'));
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
 
-document.querySelector('button').addEventListener('click', function () {
-  const text = document.querySelector('textarea').value;
-  const arr = text.split('\n');
-  let count = 1;
-  for (const word of arr) {
-    let i = 0;
-    const trimed = word.trim();
-    const modified = trimed.toLowerCase().split('_');
-    const final = [
-      modified[i],
-      modified[i + 1].slice(0, 1).toUpperCase(),
-      modified[i + 1].slice(1),
-    ].join('');
+// document.querySelector('button').addEventListener('click', function () {
+//   const text = document.querySelector('textarea').value;
+//   const arr = text.split('\n');
+//   let count = 1;
+//   for (const word of arr) {
+//     let i = 0;
+//     const trimed = word.trim();
+//     const modified = trimed.toLowerCase().split('_');
+//     const final = [
+//       modified[i],
+//       modified[i + 1].slice(0, 1).toUpperCase(),
+//       modified[i + 1].slice(1),
+//     ].join('');
 
-    console.log(final.padEnd(17, ' '), '✅'.repeat(count));
-    count++;
-  }
-});
+//     console.log(final.padEnd(17, ' '), '✅'.repeat(count));
+//     count++;
+//   }
+// });
 
 //sir's Code...
 /*
