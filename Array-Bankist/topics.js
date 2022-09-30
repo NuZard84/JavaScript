@@ -129,13 +129,14 @@ GOOD LUCK 😀
 //   fetch(url, options)
 //     .then(response => response.json())
 //     .then(data => {
-//       var a = new Map();
-//       a.set("eurtousd", String(data.rates.USD)).set(
-//         "eurtoinr",
-//         String(data.rates.INR)
-//       );
+//       console.log(data);
+//       // var a = new Map();
+//       // a.set("eurtousd", String(data.rates.USD)).set(
+//       //   "eurtoinr",
+//       //   String(data.rates.INR)
+//       // );
 
-//       obj(a);
+//       // obj(a);
 //     });
 // }
 // api(x);
