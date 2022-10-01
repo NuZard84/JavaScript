@@ -25,7 +25,7 @@ const acc4 = {
   owner: 'krish chaniyara 3',
   pin: '1111',
   intrestRate: 1, //%
-  movements: [-499, -1779, -450, 1299, 500, -999, 1500, 2500],
+  movements: [-499, 1779, -450, 1299, 500, -999, 1500, 2500],
 };
 
 const accounts = [acc1, acc2, acc3, acc4];
@@ -58,48 +58,31 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 //logics..
-let enterAcc;
+let isSorted = false;
 
-const loginStart = function (e) {
+btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
 
-  enterAcc = accounts.find(acc => acc.username === inputLoginUsername.value);
-  if (inputLoginPin.value === enterAcc?.pin) {
-    wlcm.textContent = `Welcome back, ${enterAcc.owner.split(' ')[0]}`;
+  const enterAcc = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  wlcm.textContent = `Welcome Back, ${enterAcc.owner.split(' ')[0]}`;
+  if (inputLoginPin.value === enterAcc.pin) {
     containerApp.style.opacity = '100%';
   } else {
     inputLoginPin.placeholder = 'WrongPIN';
+    alert('Your PIN is wrong, Please try again');
     inputLoginPin.value = '';
   }
   displayMovements(enterAcc.movements);
   displaySummary(enterAcc.movements, enterAcc.intrestRate);
-  displayTotalBalance();
-};
-
-let isSorted = false;
-const sorting = function () {
-  if (!isSorted) {
-    acc1.movements.sort((x, y) => y - x);
-    console.log(acc1.movements);
-    displayMovements(acc1.movements);
-    isSorted = true;
-  } else {
-    console.log(tempArray);
-    displayMovements(tempArray);
-    isSorted = false;
-  }
-};
-
-const creatUserName = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map(word => word[0])
-      .join('');
+  displayTotalBalance(enterAcc);
+  btnSort.addEventListener('click', function () {
+    console.log('sorted');
+    sorting(enterAcc);
   });
-};
-creatUserName(accounts);
+});
 
 const displayMovements = function (m) {
   containerMovements.innerHTML = '';
@@ -119,13 +102,27 @@ const displayMovements = function (m) {
   });
 };
 
-const sumTransaction = function () {
-  const total = enterAcc.movements.reduce(function (acc, cur) {
-    return acc + cur;
-  }, 0);
-  return total;
+const creatUserName = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(word => word[0])
+      .join('');
+  });
 };
-const displayTotalBalance = function () {
+creatUserName(accounts);
+
+
+
+const displayTotalBalance = function (eAcc) {
+  const sumTransaction = function () {
+    const total = eAcc.movements.reduce(function (acc, cur) {
+      return acc + cur;
+    }, 0);
+    return total;
+  };
+
   labelValue.innerHTML = sumTransaction() + ' $';
 };
 
@@ -153,10 +150,21 @@ const displaySummary = function (mov, rate) {
   labelSumIntrest.textContent = `${intrest.toFixed(2)}$`;
 };
 
-let tempArray = [];
-acc1.movements.forEach(function (cur) {
-  tempArray.push(cur);
-});
+console.log(acc1.movements);
 
-btnSort.addEventListener('click', sorting());
-btnLogin.addEventListener('click', loginStart());
+const sorting = function (acc) {
+  let tempArray = [];
+  acc.movements.forEach(function (cur) {
+    tempArray.push(cur);
+  });
+  if (!isSorted) {
+    acc.movements.sort((x, y) => y - x);
+    console.log(acc.movements);
+    displayMovements(acc.movements);
+    isSorted = true;
+  } else {
+    console.log(tempArray);
+    displayMovements(tempArray);
+    isSorted = false;
+  }
+};
