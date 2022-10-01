@@ -1,28 +1,28 @@
 'using strict';
 
 const acc1 = {
-  owner: 'het varasada 8',
+  owner: 'Het varasada 8',
   pin: '0849',
   intrestRate: 0.84, //%
   movements: [1000, -1399, -45, 1400, -849, 1499, 2000, -1279],
 };
 
 const acc2 = {
-  owner: 'vaibhav sanepra 2',
-  pin: '2003',
-  intrestRate: 0.9, //%
-  movements: [-1040, 1199, -200, 240, -2049, 1699, 2200, -1090],
-};
-
-const acc3 = {
-  owner: 'nishchit malasna 9',
+  owner: 'Nishchit malasna 9',
   pin: '9648',
   intrestRate: 1.2, //%
   movements: [899, 1100, -450, -789, -849, 1150, 350, -1099],
 };
 
+const acc3 = {
+  owner: 'Vaibhav sanepra 2',
+  pin: '2003',
+  intrestRate: 0.9, //%
+  movements: [-1040, 1199, -200, 240, -2049, 1699, 2200, -1090],
+};
+
 const acc4 = {
-  owner: 'krish chaniyara 3',
+  owner: 'Krish chaniyara 3',
   pin: '1111',
   intrestRate: 1, //%
   movements: [-499, 1779, -450, 1299, 500, -999, 1500, 2500],
@@ -112,8 +112,6 @@ const creatUserName = function (accs) {
   });
 };
 creatUserName(accounts);
-
-
 
 const displayTotalBalance = function (eAcc) {
   const sumTransaction = function () {
