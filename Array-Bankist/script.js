@@ -43,7 +43,7 @@ const containerMovements = document.querySelector('.movements');
 
 //buttons..
 const btnLogin = document.querySelector('.login__btn');
-const btnTransfer = document.querySelector('.form__btn--tranfer');
+const btnTransfer = document.querySelector('.form__btn--transfer');
 const btnForLoan = document.querySelector('.form__btn--loan');
 const btnClose = document.querySelector('.form__btn--close');
 const btnSort = document.querySelector('.btn--sort');
@@ -63,26 +63,58 @@ let isSorted = false;
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const enterAcc = accounts.find(
+  let enterAcc = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
 
   wlcm.textContent = `Welcome Back, ${enterAcc.owner.split(' ')[0]}`;
   if (inputLoginPin.value === enterAcc.pin) {
     containerApp.style.opacity = '100%';
+    inputLoginPin.placeholder = 'PIN';
+    inputLoginPin.value = inputLoginUsername.value = '';
+    inputLoginPin.blur();
+    inputLoginUsername.blur();
   } else {
     inputLoginPin.placeholder = 'WrongPIN';
     alert('Your PIN is wrong, Please try again');
     inputLoginPin.value = '';
+    inputLoginPin.blur();
   }
+
+  btnTransfer.addEventListener('click', function (e) {
+    e.preventDefault();
+    transferToAcc(enterAcc);
+  });
+
   displayMovements(enterAcc.movements);
   displaySummary(enterAcc.movements, enterAcc.intrestRate);
   displayTotalBalance(enterAcc);
+
   btnSort.addEventListener('click', function () {
     console.log('sorted');
     sorting(enterAcc);
   });
 });
+
+const transferToAcc = function (eAcc) {
+  let toAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+
+  let amount = Number(inputTransferAmount.value);
+  toAcc.movements.push(amount);
+  eAcc.movements.push(Math.abs(amount) * -1);
+  console.log(eAcc.movements);
+  console.log(toAcc.movements);
+
+  inputTransferAmount.blur();
+  displayMovements(eAcc.movements);
+  displaySummary(eAcc.movements, eAcc.intrestRate);
+  displayTotalBalance(eAcc);
+
+  btnSort.addEventListener('click', function () {
+    console.log('sorted');
+    sorting(eAcc);
+  });
+};
 
 const displayMovements = function (m) {
   containerMovements.innerHTML = '';
@@ -148,8 +180,6 @@ const displaySummary = function (mov, rate) {
   labelSumIntrest.textContent = `${intrest.toFixed(2)}$`;
 };
 
-console.log(acc1.movements);
-
 const sorting = function (acc) {
   let tempArray = [];
   acc.movements.forEach(function (cur) {
@@ -166,3 +196,4 @@ const sorting = function (acc) {
     isSorted = false;
   }
 };
+
