@@ -66,54 +66,79 @@ btnLogin.addEventListener('click', function (e) {
   let enterAcc = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
+  if (enterAcc) {
+    wlcm.textContent = `Welcome Back, ${enterAcc.owner.split(' ')[0]}`;
+    if (inputLoginPin.value === enterAcc.pin) {
+      containerApp.style.opacity = '100%';
+      inputLoginPin.placeholder = 'PIN';
+      inputLoginPin.value = inputLoginUsername.value = '';
+      inputLoginPin.blur();
+      inputLoginUsername.blur();
+    } else {
+      inputLoginPin.placeholder = 'WrongPIN';
+      alert('Your PIN is wrong, Please try again');
+      inputLoginPin.value = '';
+      inputLoginPin.blur();
+    }
 
-  wlcm.textContent = `Welcome Back, ${enterAcc.owner.split(' ')[0]}`;
-  if (inputLoginPin.value === enterAcc.pin) {
-    containerApp.style.opacity = '100%';
-    inputLoginPin.placeholder = 'PIN';
-    inputLoginPin.value = inputLoginUsername.value = '';
-    inputLoginPin.blur();
-    inputLoginUsername.blur();
-  } else {
-    inputLoginPin.placeholder = 'WrongPIN';
-    alert('Your PIN is wrong, Please try again');
-    inputLoginPin.value = '';
-    inputLoginPin.blur();
+    btnTransfer.addEventListener('click', function (e) {
+      e.preventDefault();
+      transferToAcc(enterAcc);
+    });
+
+    displayMovements(enterAcc.movements);
+    displaySummary(enterAcc.movements, enterAcc.intrestRate);
+    displayTotalBalance(enterAcc);
+
+    btnSort.addEventListener('click', function () {
+      console.log('sorted');
+      sorting(enterAcc);
+    });
   }
 
-  btnTransfer.addEventListener('click', function (e) {
-    e.preventDefault();
-    transferToAcc(enterAcc);
+  else alert('Please cheack your UserName!')
   });
-
-  displayMovements(enterAcc.movements);
-  displaySummary(enterAcc.movements, enterAcc.intrestRate);
-  displayTotalBalance(enterAcc);
-
-  btnSort.addEventListener('click', function () {
-    console.log('sorted');
-    sorting(enterAcc);
-  });
-});
 
 const transferToAcc = function (eAcc) {
   let toAcc = accounts.find(acc => acc.username === inputTransferTo.value);
 
   let amount = Number(inputTransferAmount.value);
-  toAcc.movements.push(amount);
-  eAcc.movements.push(Math.abs(amount) * -1);
-  console.log(eAcc.movements);
-  console.log(toAcc.movements);
 
-  inputTransferAmount.blur();
-  displayMovements(eAcc.movements);
-  displaySummary(eAcc.movements, eAcc.intrestRate);
-  displayTotalBalance(eAcc);
+  if (199 + amount < displayTotalBalance(eAcc)) {
+    toAcc.movements.push(amount);
+    eAcc.movements.push(Math.abs(amount) * -1);
+    inputTransferAmount.value = inputTransferTo.value = '';
+    inputTransferAmount.blur();
+    console.log(eAcc.movements);
+    console.log(toAcc.movements);
 
-  btnSort.addEventListener('click', function () {
-    console.log('sorted');
-    sorting(eAcc);
+    inputTransferAmount.blur();
+    displayTotalBalance(eAcc);
+    displayMovements(eAcc.movements);
+    displaySummary(eAcc.movements, eAcc.intrestRate);
+
+    btnSort.addEventListener('click', function () {
+      console.log('sorted');
+      sorting(eAcc);
+    });
+  } else alert('You should keep at least 200$ in your bank account.');
+};
+
+const sorting = function (acc) {
+  let tempArray = [];
+  acc.movements.forEach(function (cur) {
+    tempArray.push(cur);
   });
+  if (!isSorted) {
+    acc.movements.sort((x, y) => y - x);
+    console.log(acc.movements);
+    displayMovements(acc.movements);
+    isSorted = true;
+  } else {
+    console.log(tempArray);
+    displayMovements(tempArray);
+    isSorted = false;
+  }
 };
 
 const displayMovements = function (m) {
@@ -154,6 +179,7 @@ const displayTotalBalance = function (eAcc) {
   };
 
   labelValue.innerHTML = sumTransaction() + ' $';
+  return sumTransaction();
 };
 
 const displaySummary = function (mov, rate) {
@@ -178,22 +204,5 @@ const displaySummary = function (mov, rate) {
       return x;
     }, 0);
   labelSumIntrest.textContent = `${intrest.toFixed(2)}$`;
-};
-
-const sorting = function (acc) {
-  let tempArray = [];
-  acc.movements.forEach(function (cur) {
-    tempArray.push(cur);
-  });
-  if (!isSorted) {
-    acc.movements.sort((x, y) => y - x);
-    console.log(acc.movements);
-    displayMovements(acc.movements);
-    isSorted = true;
-  } else {
-    console.log(tempArray);
-    displayMovements(tempArray);
-    isSorted = false;
-  }
 };
 
