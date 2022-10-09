@@ -58,14 +58,13 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 //logics..
-let isSorted = false;
 
+let enterAcc;
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
 
-  let enterAcc = accounts.find(
-    acc => acc.username === inputLoginUsername.value
-  );
+  enterAcc = accounts.find(acc => acc.username === inputLoginUsername.value);
+  console.log(enterAcc);
   if (enterAcc) {
     wlcm.textContent = `Welcome Back, ${enterAcc.owner.split(' ')[0]}`;
     if (inputLoginPin.value === enterAcc.pin) {
@@ -80,70 +79,36 @@ btnLogin.addEventListener('click', function (e) {
       inputLoginPin.value = '';
       inputLoginPin.blur();
     }
+    updateUI(enterAcc);
+  } else alert('Please cheack your UserName!');
+});
 
-    btnTransfer.addEventListener('click', function (e) {
-      e.preventDefault();
-      transferToAcc(enterAcc);
-    });
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const toAcc = accounts.find(acc => inputTransferTo.value === acc.username);
 
-    displayMovements(enterAcc.movements);
-    displaySummary(enterAcc.movements, enterAcc.intrestRate);
-    displayTotalBalance(enterAcc);
+  inputTransferAmount.value = inputTransferTo.value = '';
+  if (amount > 0 && toAcc && toAcc?.username !== enterAcc.username) {
+    if (amount < enterAcc.balance - 199) {
+      enterAcc.movements.push(-amount);
+      toAcc.movements.push(amount);
 
-    btnSort.addEventListener('click', function () {
-      console.log('sorted');
-      sorting(enterAcc);
-    });
-  }
-
-  else alert('Please cheack your UserName!')
-  });
-
-const transferToAcc = function (eAcc) {
-  let toAcc = accounts.find(acc => acc.username === inputTransferTo.value);
-
-  let amount = Number(inputTransferAmount.value);
-
-  if (199 + amount < displayTotalBalance(eAcc)) {
-    toAcc.movements.push(amount);
-    eAcc.movements.push(Math.abs(amount) * -1);
-    inputTransferAmount.value = inputTransferTo.value = '';
-    inputTransferAmount.blur();
-    console.log(eAcc.movements);
-    console.log(toAcc.movements);
-
-    inputTransferAmount.blur();
-    displayTotalBalance(eAcc);
-    displayMovements(eAcc.movements);
-    displaySummary(eAcc.movements, eAcc.intrestRate);
-
-    btnSort.addEventListener('click', function () {
-      console.log('sorted');
-      sorting(eAcc);
-    });
-  } else alert('You should keep at least 200$ in your bank account.');
-};
-
-const sorting = function (acc) {
-  let tempArray = [];
-  acc.movements.forEach(function (cur) {
-    tempArray.push(cur);
-  });
-  if (!isSorted) {
-    acc.movements.sort((x, y) => y - x);
-    console.log(acc.movements);
-    displayMovements(acc.movements);
-    isSorted = true;
+      updateUI(enterAcc);
+    } else {
+      alert('you must keep at least 200$ in your bank account !');
+    }
   } else {
-    console.log(tempArray);
-    displayMovements(tempArray);
-    isSorted = false;
+    alert("please check your input 'Transfer To' UserName !");
   }
-};
+});
 
-const displayMovements = function (m) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  m.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -151,11 +116,11 @@ const displayMovements = function (m) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${Math.abs(mov)}$</div>
+        <div class="movements__value">${mov}$</div>
       </div>
     `;
 
-    containerMovements.insertAdjacentHTML('beforeend', html);
+    containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
 
@@ -170,39 +135,86 @@ const creatUserName = function (accs) {
 };
 creatUserName(accounts);
 
-const displayTotalBalance = function (eAcc) {
-  const sumTransaction = function () {
-    const total = eAcc.movements.reduce(function (acc, cur) {
-      return acc + cur;
-    }, 0);
-    return total;
-  };
-
-  labelValue.innerHTML = sumTransaction() + ' $';
-  return sumTransaction();
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelValue.textContent = `${acc.balance}$`;
 };
 
-const displaySummary = function (mov, rate) {
-  const income = mov
-    .filter(movs => movs > 0)
-    .reduce((acc, cur) => acc + cur, 0);
-  labelSumIn.textContent = `${income}$`;
+const displaySummary = function (acc) {
+  const incomes = acc.movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}$`;
 
-  const expence = mov
-    .filter(movs => movs < 0)
-    .reduce((acc, cur) => acc + cur, 0);
-  labelSumOut.textContent = `${Math.abs(expence)}$`;
+  const out = acc.movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)}$`;
 
-  const intrest = mov
-    .map((p, index, arr, i, r = rate, n = 1) => {
-      i = (Math.abs(p) * r * n) / 100;
-      // console.log(Math.abs(p), r, n, i, arr);
-      return i;
+  const interest = acc.movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * acc.intrestRate) / 100)
+    .filter((int, i, arr) => {
+      //
+      return int >= 1;
     })
-    .reduce((acc, cur, i, arr) => {
-      const x = Number(acc + cur);
-      return x;
-    }, 0);
-  labelSumIntrest.textContent = `${intrest.toFixed(2)}$`;
+    .reduce((acc, int) => acc + int, 0);
+  labelSumIntrest.textContent = `${interest.toFixed(2)}$`;
 };
 
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (inputCloseUsername.value === enterAcc.username) {
+    if (inputClosePin.value === enterAcc.pin) {
+      inputClosePin.placeholder = 'PIN';
+      const index = accounts.findIndex(
+        acc => inputCloseUsername.value === acc.username
+      );
+
+      accounts.splice(index, 1);
+
+      containerApp.style.opacity = '0';
+      wlcm.textContent = 'Log in to get started';
+    } else {
+      inputClosePin.placeholder = 'WrongPIN';
+      alert('Your PIN is wrong, Please try again');
+      inputClosePin.value = '';
+      inputClosePin.blur();
+    }
+  } else {
+    alert('please enter Right UserName !');
+  }
+
+  inputClosePin.value = inputCloseUsername.value = '';
+});
+let isSorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  displayMovements(enterAcc.movements, !isSorted);
+  isSorted = !isSorted;
+});
+
+btnForLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  console.log(amount);
+  if (amount > 0 && enterAcc.movements.some(mov => mov > amount * 1.3)) {
+    enterAcc.movements.push(amount);
+
+    updateUI(enterAcc);
+  } else {
+    alert(
+      'To claim the loan you need credited at least 13% of your desired amount'
+    );
+  }
+  inputLoanAmount.value = '';
+});
+const updateUI = function (enterAcc) {
+  calcDisplayBalance(enterAcc);
+
+  displaySummary(enterAcc);
+
+  displayMovements(enterAcc.movements);
+};
