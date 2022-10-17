@@ -276,6 +276,7 @@ btnForLoan.addEventListener('click', function (e) {
   }
   inputLoanAmount.value = '';
 });
+
 const updateUI = function (enterAcc) {
   calcDisplayBalance(enterAcc);
 
