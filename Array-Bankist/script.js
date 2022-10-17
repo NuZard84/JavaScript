@@ -5,6 +5,16 @@ const acc1 = {
   pin: '0849',
   intrestRate: 0.84, //%
   movements: [1000, -1399, -45, 1400, -849, 1499, 2000, -1279],
+  movementsDates: [
+    '2019-11-18T21:31:17.178Z',
+    '2019-12-23T07:42:02.383Z',
+    '2020-01-28T09:15:04.904Z',
+    '2020-04-01T10:17:24.185Z',
+    '2020-05-08T14:11:59.604Z',
+    '2020-07-26T17:01:17.194Z',
+    '2020-07-28T23:36:17.929Z',
+    '2020-08-01T10:51:36.790Z',
+  ],
 };
 
 const acc2 = {
@@ -12,6 +22,16 @@ const acc2 = {
   pin: '9648',
   intrestRate: 1.2, //%
   movements: [899, 1100, -450, -789, -849, 1150, 350, -1099],
+  movementsDates: [
+    '2019-11-01T13:15:33.035Z',
+    '2019-11-30T09:48:16.867Z',
+    '2019-12-25T06:04:23.907Z',
+    '2020-01-25T14:18:46.235Z',
+    '2020-02-05T16:33:06.386Z',
+    '2020-04-10T14:43:26.374Z',
+    '2020-06-25T18:49:59.371Z',
+    '2020-07-26T12:01:20.894Z',
+  ],
 };
 
 const acc3 = {
@@ -19,6 +39,16 @@ const acc3 = {
   pin: '2003',
   intrestRate: 0.9, //%
   movements: [-1040, 1199, -200, 240, -2049, 1699, 2200, -1090],
+  movementsDates: [
+    '2019-01-25T21:31:17.178Z',
+    '2019-08-13T07:42:02.383Z',
+    '2020-11-07T09:15:04.904Z',
+    '2020-12-22T10:17:24.185Z',
+    '2020-09-03T14:11:59.604Z',
+    '2020-04-12T17:01:17.194Z',
+    '2020-02-09T23:36:17.929Z',
+    '2020-10-31T10:51:36.790Z',
+  ],
 };
 
 const acc4 = {
@@ -26,6 +56,16 @@ const acc4 = {
   pin: '1111',
   intrestRate: 1, //%
   movements: [-499, 1779, -450, 1299, 500, -999, 1500, 2500],
+  movementsDates: [
+    '2019-05-31T13:15:33.035Z',
+    '2019-10-18T09:48:16.867Z',
+    '2019-09-21T06:04:23.907Z',
+    '2020-12-25T14:18:46.235Z',
+    '2020-08-09T16:33:06.386Z',
+    '2020-04-01T14:43:26.374Z',
+    '2020-06-27T18:49:59.371Z',
+    '2020-11-15T12:01:20.894Z',
+  ],
 };
 
 const accounts = [acc1, acc2, acc3, acc4];
@@ -66,7 +106,20 @@ btnLogin.addEventListener('click', function (e) {
   enterAcc = accounts.find(acc => acc.username === inputLoginUsername.value);
   console.log(enterAcc);
   if (enterAcc) {
+    const LoginDT = new Date();
+  const date = `${LoginDT.getDate()}`.padStart(2, 0);
+  const month = `${LoginDT.getMonth()}`.padStart(2, 0);
+  const year = LoginDT.getFullYear();
+  const hour = `${LoginDT.getHours()}`.padStart(2, 0);
+  const minutes = `${LoginDT.getMinutes()}`.padStart(2, 0);
+  const seconds = `${LoginDT.getSeconds()}`.padStart(2, 0);
+  let ampm = 'PM';
+  ampm = hour > 11 ? 'PM' : 'AM';
+  labelDate.textContent = `${date}/${month}/${year} ${
+    hour > 11 ? hour - 12 : hour
+  }:${minutes}:${seconds} ${ampm}`;
     wlcm.textContent = `Welcome Back, ${enterAcc.owner.split(' ')[0]}`;
+
     if (inputLoginPin.value === enterAcc.pin) {
       containerApp.style.opacity = '100%';
       inputLoginPin.placeholder = 'PIN';
@@ -94,6 +147,9 @@ btnTransfer.addEventListener('click', function (e) {
       enterAcc.movements.push(-amount);
       toAcc.movements.push(amount);
 
+      enterAcc.movementsDates.push(new Date().toISOString());
+      toAcc.movementsDates.push(new Date().toISOString());
+
       updateUI(enterAcc);
     } else {
       alert('you must keep at least 200$ in your bank account !');
@@ -105,18 +161,25 @@ btnTransfer.addEventListener('click', function (e) {
 
 const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-
+  
   const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
+    const MovDate = new Date(enterAcc.movementsDates[i]);
+    const date = `${MovDate.getDate()}`.padStart(2, 0);
+    const month = `${MovDate.getMonth()}`.padStart(2, 0);
+    const year = MovDate.getFullYear();
+    const displayMovDate = `${date}/${month}/${year}`;
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
+      <div class="movements__date">${displayMovDate}</div>
         <div class="movements__value">${mov}$</div>
+        
       </div>
     `;
 
@@ -202,6 +265,8 @@ btnForLoan.addEventListener('click', function (e) {
   console.log(amount);
   if (amount > 0 && enterAcc.movements.some(mov => mov > amount * 1.3)) {
     enterAcc.movements.push(amount);
+    enterAcc.movementsDates.push(new Date().toISOString());
+
 
     updateUI(enterAcc);
   } else {
