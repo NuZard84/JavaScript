@@ -62,9 +62,9 @@ const acc4 = {
     '2019-09-21T06:04:23.907Z',
     '2020-12-25T14:18:46.235Z',
     '2020-08-09T16:33:06.386Z',
-    '2020-04-01T14:43:26.374Z',
-    '2020-06-27T18:49:59.371Z',
-    '2020-11-15T12:01:20.894Z',
+    '2022-10-12T14:43:26.374Z',
+    '2022-10-16T18:49:59.371Z',
+    '2022-10-17T12:01:20.894Z',
   ],
 };
 
@@ -107,17 +107,16 @@ btnLogin.addEventListener('click', function (e) {
   console.log(enterAcc);
   if (enterAcc) {
     const LoginDT = new Date();
-  const date = `${LoginDT.getDate()}`.padStart(2, 0);
-  const month = `${LoginDT.getMonth()}`.padStart(2, 0);
-  const year = LoginDT.getFullYear();
-  const hour = `${LoginDT.getHours()}`.padStart(2, 0);
-  const minutes = `${LoginDT.getMinutes()}`.padStart(2, 0);
-  const seconds = `${LoginDT.getSeconds()}`.padStart(2, 0);
-  let ampm = 'PM';
-  ampm = hour > 11 ? 'PM' : 'AM';
-  labelDate.textContent = `${date}/${month}/${year} ${
-    hour > 11 ? hour - 12 : hour
-  }:${minutes}:${seconds} ${ampm}`;
+    const lblDate = formateDate(LoginDT);
+    const hour = `${LoginDT.getHours()}`.padStart(2, 0);
+    const minutes = `${LoginDT.getMinutes()}`.padStart(2, 0);
+    const seconds = `${LoginDT.getSeconds()}`.padStart(2, 0);
+    let ampm = 'PM';
+    ampm = hour > 11 ? 'PM' : 'AM';
+    console.log(labelDate,hour,minutes,seconds,ampm);
+    labelDate.textContent = `${lblDate} ${
+      hour > 11 ? hour - 12 : hour
+    }:${minutes}:${seconds} ${ampm}`;
     wlcm.textContent = `Welcome Back, ${enterAcc.owner.split(' ')[0]}`;
 
     if (inputLoginPin.value === enterAcc.pin) {
@@ -159,19 +158,25 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+let isSorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  displayMovements(enterAcc.movements, !isSorted);
+  isSorted = !isSorted;
+});
+
 const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  const movs = sort ? movements.sort((a, b) => a - b) : movements;
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const MovDate = new Date(enterAcc.movementsDates[i]);
-    const date = `${MovDate.getDate()}`.padStart(2, 0);
-    const month = `${MovDate.getMonth()}`.padStart(2, 0);
-    const year = MovDate.getFullYear();
-    const displayMovDate = `${date}/${month}/${year}`;
+   
+    const displayMovDate = formateDate(MovDate) ;
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
@@ -251,13 +256,6 @@ btnClose.addEventListener('click', function (e) {
 
   inputClosePin.value = inputCloseUsername.value = '';
 });
-let isSorted = false;
-btnSort.addEventListener('click', function (e) {
-  e.preventDefault();
-
-  displayMovements(enterAcc.movements, !isSorted);
-  isSorted = !isSorted;
-});
 
 btnForLoan.addEventListener('click', function (e) {
   e.preventDefault();
@@ -266,7 +264,6 @@ btnForLoan.addEventListener('click', function (e) {
   if (amount > 0 && enterAcc.movements.some(mov => mov > amount * 1.3)) {
     enterAcc.movements.push(amount);
     enterAcc.movementsDates.push(new Date().toISOString());
-
 
     updateUI(enterAcc);
   } else {
@@ -284,3 +281,27 @@ const updateUI = function (enterAcc) {
 
   displayMovements(enterAcc.movements);
 };
+
+const formateDate = function (date) {
+  const calcDateDiff = (date1, date2) => Math.round(Math.abs((date1 - date2) / (1000 * 60 * 60 * 24)));
+
+  
+  const dayPassed = calcDateDiff(new Date(), date);
+
+  if (dayPassed === 0) return 'Today';
+  if (dayPassed === 1) return 'Yesterday';
+  if (dayPassed <= 7) return `${dayPassed} Days ago`;
+ 
+  const day = `${date.getDate()}`.padStart(2, 0);
+  const month = `${date.getMonth()}`.padStart(2, 0);
+  const year = date.getFullYear();
+
+
+  return `${day}/${month}/${year}`;
+}
+
+
+// enterAcc = acc1;
+// containerApp.style.opacity = '100%';
+// updateUI(enterAcc);
+
