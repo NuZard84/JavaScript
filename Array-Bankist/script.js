@@ -15,6 +15,8 @@ const acc1 = {
     '2020-07-28T23:36:17.929Z',
     '2020-08-01T10:51:36.790Z',
   ],
+  currency: 'INR',
+  locale: 'gu-IN',
 };
 
 const acc2 = {
@@ -32,6 +34,8 @@ const acc2 = {
     '2020-06-25T18:49:59.371Z',
     '2020-07-26T12:01:20.894Z',
   ],
+  currency: 'INR',
+  locale: 'hi-IN',
 };
 
 const acc3 = {
@@ -49,6 +53,8 @@ const acc3 = {
     '2020-02-09T23:36:17.929Z',
     '2020-10-31T10:51:36.790Z',
   ],
+  currency: 'EUR',
+  locale: 'pt-PT', // de-DE
 };
 
 const acc4 = {
@@ -66,6 +72,8 @@ const acc4 = {
     '2022-10-16T18:49:59.371Z',
     '2022-10-17T12:01:20.894Z',
   ],
+  currency: 'USD',
+  locale: 'en-US',
 };
 
 const accounts = [acc1, acc2, acc3, acc4];
@@ -106,17 +114,31 @@ btnLogin.addEventListener('click', function (e) {
   enterAcc = accounts.find(acc => acc.username === inputLoginUsername.value);
   console.log(enterAcc);
   if (enterAcc) {
-    const LoginDT = new Date();
-    const lblDate = formateDate(LoginDT);
-    const hour = `${LoginDT.getHours()}`.padStart(2, 0);
-    const minutes = `${LoginDT.getMinutes()}`.padStart(2, 0);
-    const seconds = `${LoginDT.getSeconds()}`.padStart(2, 0);
-    let ampm = 'PM';
-    ampm = hour > 11 ? 'PM' : 'AM';
-    console.log(labelDate,hour,minutes,seconds,ampm);
-    labelDate.textContent = `${lblDate} ${
-      hour > 11 ? hour - 12 : hour
-    }:${minutes}:${seconds} ${ampm}`;
+    logoutTime();
+    const now = new Date();
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+    };
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      enterAcc.locale,
+      options
+    ).format(now);
+    // const LoginDT = new Date();
+    // const lblDate = formateDate(LoginDT);
+    // const hour = `${LoginDT.getHours()}`.padStart(2, 0);
+    // const minutes = `${LoginDT.getMinutes()}`.padStart(2, 0);
+    // const seconds = `${LoginDT.getSeconds()}`.padStart(2, 0);
+    // let ampm = 'PM';
+    // ampm = hour > 11 ? 'PM' : 'AM';
+    // console.log(labelDate,hour,minutes,seconds,ampm);
+    // labelDate.textContent = `${lblDate} ${
+    //   hour > 11 ? hour - 12 : hour
+    // }:${minutes}:${seconds} ${ampm}`;
     wlcm.textContent = `Welcome Back, ${enterAcc.owner.split(' ')[0]}`;
 
     if (inputLoginPin.value === enterAcc.pin) {
@@ -175,8 +197,8 @@ const displayMovements = function (movements, sort = false) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const MovDate = new Date(enterAcc.movementsDates[i]);
-   
-    const displayMovDate = formateDate(MovDate) ;
+
+    const displayMovDate = formateDate(MovDate, enterAcc.locale);
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
@@ -282,26 +304,43 @@ const updateUI = function (enterAcc) {
   displayMovements(enterAcc.movements);
 };
 
-const formateDate = function (date) {
-  const calcDateDiff = (date1, date2) => Math.round(Math.abs((date1 - date2) / (1000 * 60 * 60 * 24)));
+const formateDate = function (date, locale) {
+  const calcDateDiff = (date1, date2) =>
+    Math.round(Math.abs((date1 - date2) / (1000 * 60 * 60 * 24)));
 
-  
   const dayPassed = calcDateDiff(new Date(), date);
 
   if (dayPassed === 0) return 'Today';
   if (dayPassed === 1) return 'Yesterday';
   if (dayPassed <= 7) return `${dayPassed} Days ago`;
- 
-  const day = `${date.getDate()}`.padStart(2, 0);
-  const month = `${date.getMonth()}`.padStart(2, 0);
-  const year = date.getFullYear();
 
+  // const day = `${date.getDate()}`.padStart(2, 0);
+  // const month = `${date.getMonth()}`.padStart(2, 0);
+  // const year = date.getFullYear();
 
-  return `${day}/${month}/${year}`;
-}
+  return new Intl.DateTimeFormat(locale).format(date);
+};
 
+let sec = 60;
+let min = 4;
+let t;
+const logoutTime = function () {
+  const time = setInterval(function () {
+    if (sec === 0 && min === 0) {
+      wlcm.textContent = 'Log in to get started';
+      containerApp.style.opacity = '0';
+      console.log('logout');
+      clearInterval(time);
 
-// enterAcc = acc1;
-// containerApp.style.opacity = '100%';
-// updateUI(enterAcc);
-
+      alert('you have been Logout due to TimeOut !');
+    } else {
+      sec = sec - 1;
+      if (sec === 0 && min !== 0) {
+        min = min - 1;
+        sec = 60;
+      }
+      lableTimer.textContent =
+        `${min}`.padStart(2, 0) + ':' + `${sec}`.padStart(2, 0);
+    }
+  }, 1000);
+};
