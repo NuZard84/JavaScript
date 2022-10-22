@@ -15,17 +15,14 @@ function shutModal() {
   overlay.classList.add('hidden');
 }
 
-for (let i = 0; i < 3; i++){
-
+for (let i = 0; i < 3; i++) {
   seeModal[i].addEventListener('click', openModal);
 }
 
 closeModal.addEventListener('click', shutModal);
 
 document.addEventListener('keydown', function (e) {
-  
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-    
     shutModal();
   }
-})
+});

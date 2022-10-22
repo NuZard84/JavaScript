@@ -20,7 +20,7 @@ const acc1 = {
 };
 
 const acc2 = {
-  owner: 'Nishchit malasna 9',
+  owner: 'Nishchit malasana 9',
   pin: '9648',
   intrestRate: 1.2, //%
   movements: [899, 1100, -450, -789, -849, 1150, 350, -1099],
@@ -88,6 +88,8 @@ const labelSumIntrest = document.querySelector('.summary__value--interest');
 const lableTimer = document.querySelector('.timer');
 const containerApp = document.querySelector('.app');
 const containerMovements = document.querySelector('.movements');
+const modal = document.querySelector('.modal');
+const overlay = document.querySelector('.overlay');
 
 //buttons..
 const btnLogin = document.querySelector('.login__btn');
@@ -95,7 +97,8 @@ const btnTransfer = document.querySelector('.form__btn--transfer');
 const btnForLoan = document.querySelector('.form__btn--loan');
 const btnClose = document.querySelector('.form__btn--close');
 const btnSort = document.querySelector('.btn--sort');
-
+const btnLogo = document.querySelector('.logo');
+const btnCloseModal = document.querySelector('.close-modal');
 
 //input..
 const inputLoginUsername = document.querySelector('.login__input--user');
@@ -108,7 +111,9 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 //logics..
 
-let enterAcc,timing = false,timer;
+let enterAcc,
+  timing = false,
+  timer;
 
 //Functions...
 
@@ -150,7 +155,6 @@ const displaySummary = function (acc) {
   labelSumIntrest.textContent = `${interest.toFixed(2)}$`;
 };
 
-
 const updateUI = function (enterAcc) {
   calcDisplayBalance(enterAcc);
 
@@ -187,8 +191,7 @@ const logoutTime = function () {
       clearInterval(time);
       timing = false;
       alert('you have been Logout due to TimeOut !');
-    }
-    else {
+    } else {
       sec = sec - 1;
       if (sec === 0 && min !== 0) {
         min = min - 1;
@@ -231,7 +234,18 @@ const displayMovements = function (movements, sort = false) {
 const resetTimer = function () {
   clearInterval(timer);
   logoutTime();
+};
+
+function openModal() {
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
 }
+
+function shutModal() {
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
+}
+
 //Buttons' Functionallity...
 
 btnLogin.addEventListener('click', function (e) {
@@ -242,11 +256,10 @@ btnLogin.addEventListener('click', function (e) {
   if (enterAcc) {
     if (!timing) {
       logoutTime();
-    }
-    else {
+    } else {
       resetTimer();
     }
-    
+
     const now = new Date();
     const options = {
       hour: 'numeric',
@@ -321,7 +334,6 @@ btnSort.addEventListener('click', function (e) {
   isSorted = !isSorted;
 });
 
-
 btnForLoan.addEventListener('click', function (e) {
   e.preventDefault();
   resetTimer();
@@ -342,7 +354,7 @@ btnForLoan.addEventListener('click', function (e) {
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
-  
+
   if (inputCloseUsername.value === enterAcc.username) {
     if (inputClosePin.value === enterAcc.pin) {
       inputClosePin.placeholder = 'PIN';
@@ -367,3 +379,20 @@ btnClose.addEventListener('click', function (e) {
   inputClosePin.value = inputCloseUsername.value = '';
 });
 
+btnLogo.addEventListener('mouseover', function () {
+  document.querySelector('.clickable0').style.display = 'none';
+  document.querySelector('.clickable1').style.display = 'none';
+});
+btnLogo.addEventListener('mouseleave', function () {
+  document.querySelector('.clickable0').style.display = 'block';
+  document.querySelector('.clickable1').style.display = 'block';
+});
+
+btnLogo.addEventListener('click', openModal);
+btnCloseModal.addEventListener('click', shutModal);
+overlay.addEventListener('click', shutModal);
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    shutModal();
+  }
+});

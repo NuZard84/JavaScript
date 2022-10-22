@@ -4,7 +4,7 @@
  * Have fun! 😁
  */
 
- * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
@@ -21,6 +21,7 @@ body {
   background-color: #f3f3f3;
   height: 100vh;
   padding: 2rem;
+  z-index: 1;
 }
 
 nav {
@@ -33,10 +34,6 @@ nav {
 .welcome {
   font-size: 1.9rem;
   font-weight: 500;
-}
-
-.logo {
-  height: 5.25rem;
 }
 
 .login {
@@ -206,7 +203,6 @@ nav {
   cursor: pointer;
 }
 
-
 /* OPERATIONS */
 .operation {
   border-radius: 1rem;
@@ -295,4 +291,101 @@ h2 {
 
 .timer {
   font-weight: 600;
+}
+
+.hidden {
+  display: none;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  font-size: 5rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  height: 90%;
+  background-color: rgb(215, 215, 215);
+  padding: 3.5rem;
+  padding-bottom: 10rem;
+  border-radius: 13px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.5);
+  border: dashed 2px #333;
+  z-index: 10;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(10x);
+  z-index: 5;
+}
+
+span {
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+p {
+  font-size: medium;
+}
+
+h1 {
+  max-width: 45%;
+  color: rgb(10, 10, 10);
+  margin-bottom: 15px;
+  border-left: solid 3px;
+  border-bottom: solid 5px;
+  background-color: rgb(214, 214, 214);
+  padding-left: 10px;
+  border-radius: 10px;
+  box-shadow: 4px 5px 11px rgba(0, 0, 0, 0.5);
+}
+h3 {
+  font-size: 15px;
+  max-width: 51%;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: solid 5px;
+  background-color: rgb(214, 214, 214);
+  padding-left: 10px;
+  border-radius: 5px;
+  box-shadow: 4px 5px 11px rgba(0, 0, 0, 0.5);
+}
+.clickable0 {
+  position: absolute;
+  border-bottom: solid 1px rgb(0, 0, 0);
+  padding-bottom: 0px;
+  font-size: 18px;
+  top: 50px;
+  left: 580px;
+  transition: all 1.5s;
+}
+.clickable1 {
+  position: absolute;
+  transform: rotate(150deg);
+  font-size: 50px;
+  top: 30px;
+  left: 660px;
+  transition: ease-in 1.5s;
+}
+.logo {
+  height: 5.25rem;
+  cursor: pointer;
+  color: #e52a5a;
+  transition: ease-in 1.5s;
 }
