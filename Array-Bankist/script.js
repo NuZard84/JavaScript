@@ -250,7 +250,8 @@ function shutModal() {
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
-
+  document.querySelector('.clickable1').style.display = 'none';
+  document.querySelector('.clickable0').style.display = 'none';
   enterAcc = accounts.find(acc => acc.username === inputLoginUsername.value);
   console.log(enterAcc);
   if (enterAcc) {
