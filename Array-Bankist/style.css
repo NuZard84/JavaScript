@@ -372,7 +372,7 @@ h3 {
   font-size: 18px;
   top: 50px;
   left: 580px;
-  transition: all 1.5s;
+  transition: all 0.6s;
 }
 .clickable1 {
   position: absolute;
@@ -380,11 +380,11 @@ h3 {
   font-size: 50px;
   top: 30px;
   left: 660px;
-  transition: ease-in 1.5s;
+  transition: ease-in 0.6s;
 }
 .logo {
   height: 5.25rem;
   cursor: pointer;
   color: #e52a5a;
-  transition: ease-in 1.5s;
+  transition: ease-in 0.8s;
 }

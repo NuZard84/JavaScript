@@ -114,6 +114,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 let enterAcc,
   timing = false,
   timer;
+  
 
 //Functions...
 
@@ -250,8 +251,9 @@ function shutModal() {
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
-  document.querySelector('.clickable1').style.display = 'none';
-  document.querySelector('.clickable0').style.display = 'none';
+  document.querySelector('.clickable1').style.left = '645px'
+  document.querySelector('.clickable0').style.left = '565px'
+  
   enterAcc = accounts.find(acc => acc.username === inputLoginUsername.value);
   console.log(enterAcc);
   if (enterAcc) {
@@ -381,12 +383,12 @@ btnClose.addEventListener('click', function (e) {
 });
 
 btnLogo.addEventListener('mouseover', function () {
-  document.querySelector('.clickable0').style.display = 'none';
-  document.querySelector('.clickable1').style.display = 'none';
+  document.querySelector('.clickable1').classList.add('hidden');
+  document.querySelector('.clickable0').classList.add('hidden');
 });
 btnLogo.addEventListener('mouseleave', function () {
-  document.querySelector('.clickable0').style.display = 'block';
-  document.querySelector('.clickable1').style.display = 'block';
+  document.querySelector('.clickable0').classList.remove('hidden');
+  document.querySelector('.clickable1').classList.remove('hidden');
 });
 
 btnLogo.addEventListener('click', openModal);
