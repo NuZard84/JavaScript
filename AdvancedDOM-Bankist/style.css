@@ -30,6 +30,7 @@
     color: #444;
     line-height: 1.9;
     background-color: #f3f3f3;
+    overflow-x: hidden;
   }
   
   /* GENERAL ELEMENTS */
@@ -670,4 +671,20 @@
     color: #bbb;
     font-size: 1.5rem;
     font-weight: 400;
+  }
+
+  ::-webkit-scrollbar{
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background:rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    ;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #37383d;
+    border-radius: 500px;
+   
   }
