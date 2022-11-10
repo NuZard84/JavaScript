@@ -1,14 +1,15 @@
-'using strict';
-
 //DOM...
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const header = document.querySelector('.header');
 const scrollTo = document.querySelector('.btn--scroll-to');
+const header = document.querySelector('.header');
+const footer = document.querySelector('.footer');
 const section1 = document.getElementById('section--1');
+const section3 = document.getElementById('section--3');
+const lastSec = document.querySelector('.section--sign-up');
 const navLinks = document.querySelector('.nav__links');
 const tabBtn = document.querySelectorAll('.operations__tab');
 const tabCont = document.querySelectorAll('.operations__content');
@@ -22,31 +23,29 @@ const btnSlideLeft = document.querySelector('.slider__btn--left');
 const btnSlideRight = document.querySelector('.slider__btn--right');
 const dot = document.querySelector('.dots');
 
-
 // Modal window
 
 const openModal = function (e) {
-    e.preventDefault();
-    modal.classList.remove('hidden');
-    overlay.classList.remove('hidden');
-  };
-  
-  const closeModal = function () {
-    modal.classList.add('hidden');
-    overlay.classList.add('hidden');
-  };
-  
-  btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
-  
-  btnCloseModal.addEventListener('click', closeModal);
-  overlay.addEventListener('click', closeModal);
-  
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-      closeModal();
-    }
-  });
+  e.preventDefault();
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+};
 
+const closeModal = function () {
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
+};
+
+btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+
+btnCloseModal.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    closeModal();
+  }
+});
 
 //Creating and Delete Cookie element...
 
@@ -55,7 +54,22 @@ msg.classList.add('cookie-message');
 msg.innerHTML =
   'we use cokies for your better experience. <button class="btn btn--close-cookie">got it!</button>';
 
-header.append(msg);
+lastSec.before(msg);
+msg.classList.add('stickyck')
+
+const cookie = function (entries) {
+  
+  const [entry] = entries;
+  console.log(entry);
+  if(entry.isIntersecting) msg.classList.remove('stickyck')
+
+ 
+}
+const sec3Observer = new IntersectionObserver(cookie, {
+  root: null,
+  threshold: 1,
+})
+sec3Observer.observe(lastSec);
 
 document
   .querySelector('.btn--close-cookie')
@@ -64,9 +78,9 @@ document
     msg.parentElement.removeChild(msg);
   });
 
-  msg.style.backgroundColor = '#37383d';
+msg.style.backgroundColor = '#37383d';
 msg.style.width = '120%';
-msg.style.borderRadius = '19%';
+
 //to get antribute of style.css file ..
 console.log(getComputedStyle(msg).color);
 msg.style.height = Number.parseFloat(getComputedStyle(msg).height) + 33 + 'px';
@@ -99,6 +113,7 @@ const navHeight = document.querySelector('.nav').getBoundingClientRect().height;
 
 const stickyNav = function (entries) {
   const [entry] = entries;
+
   console.log(entry); //all element to help to impliment what we want to...
   if (!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
@@ -106,9 +121,9 @@ const stickyNav = function (entries) {
 const headerObserverAPi = new IntersectionObserver(stickyNav, {
   root: null,
   rootmargin: `-${navHeight}px`,
-  threshold: 0, //intersectoing ratio
+  threshold: 0, //intersectoing ratio : when 0% of target visible...ex: thresold: 1.0, it means when 100% target visible...
 });
-headerObserverAPi.observe(header);
+headerObserverAPi.observe(section1);
 
 //Scroll to Specific Section...
 
