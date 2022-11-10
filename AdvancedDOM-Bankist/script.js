@@ -67,7 +67,7 @@ const cookie = function (entries) {
 }
 const sec3Observer = new IntersectionObserver(cookie, {
   root: null,
-  threshold: 1,
+  threshold: 0,
 })
 sec3Observer.observe(lastSec);
 
