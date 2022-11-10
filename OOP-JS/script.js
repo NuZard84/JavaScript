@@ -80,4 +80,5 @@ Array.prototype.unique = function () {
 console.log(arr.unique()); //3,6,5,9
 
 const h1 = document.querySelector('h1');
-console.dir(x => x + 1); //object
+console.dir(x => x + 1); //anonymous object for function...
+
