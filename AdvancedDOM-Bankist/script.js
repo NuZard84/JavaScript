@@ -62,7 +62,6 @@ const cookie = function (entries) {
   const [entry] = entries;
   console.log(entry);
   if(entry.isIntersecting) msg.classList.remove('stickyck')
-
  
 }
 const sec3Observer = new IntersectionObserver(cookie, {
@@ -76,10 +75,10 @@ document
   .addEventListener('click', function (e) {
     // msg.remove();
     msg.parentElement.removeChild(msg);
-  });
+  }); 
 
 msg.style.backgroundColor = '#37383d';
-msg.style.width = '120%';
+msg.style.width = '110%';
 
 //to get antribute of style.css file ..
 console.log(getComputedStyle(msg).color);
@@ -162,8 +161,10 @@ const revealSec = function (entries, observer) {
 
   if (entry.isIntersecting) entry.target.classList.remove('section--hidden');
   else return;
+
   observer.unobserve(entry.target);
 };
+
 
 const sectionObserver = new IntersectionObserver(revealSec, {
   root: null,
@@ -184,7 +185,7 @@ const loadImage = function (entries, observer) {
 
   entry.target.src = entry.target.dataset.src;
 
-  //==>here replacing src IMG is work in behind the scene and while this operation occur , 'LOAD' event occur to load the image...
+  //==>here replacing src(data-set : blurImage) IMG(fullResoluated Image) is work in behind the scene and while this operation occur , 'LOAD' event occur to load the image...
   entry.target.addEventListener('load', function () {
     entry.target.classList.remove('lazy-img');
   });
