@@ -114,93 +114,17 @@ console.log('After', mercedese); //speed : 150
 // const PersonCl = class { };
 
 //class declaration...
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
-
-  //Methoss wil be added in ,prototype property...m
-  calcAge() {
-    console.log(`${this.fullName}'s Age:`, 2023 - this.birthYear);
-  }
-
-  greetUser() {
-    console.log(
-      `hello welcome User, take a view on this site ${this.fullName}`
-    );
-  }
-
-  //set property that already exist...
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    else alert('please type FullName !!');
-  }
-
-  get fullName() {
-    return this._fullName;
-  }
-}
-
-const nishchit = new PersonCl('nishchit', 2001);
-nishchit.calcAge();
-nishchit.greetUser();
-console.log(nishchit);
-
-//1. Classes are NOT hoisted.
-//2. class are First-class citizens...it means behind the scene classes are special type of functions.
-//3. Classes are executed in strict mode.
-
-//GET & SET...
 const account = {
-  owner: 'Het',
-  movements: [200, 300, 245, 675],
+  owner: 'jonas',
+  movements: [200, 530, 120, 300],
 
-  //GET & SET is not called function...
   get latest() {
-    return this.movements.slice(-1).pop();
-  },
+    return this.movement.slice(-1).pop();
 
-  set latest(mov) {
-    this.movements.push(mov);
-  },
+  }
+   
+  4
 };
 
-class PersonCl1 {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
-  // Instance methods
-  // Methods will be added to .prototype property
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  }
-  greet() {
-    console.log(`Hey ${this.fullName}`);
-  }
-  get age() {
-    return 2037 - this.birthYear;
-  }
-  // Set a property that already exists
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    else alert(`${name} is not a full name!`);
-  }
-  get fullName() {
-    return this._fullName;
-  }
-  // Static method
-  static hey() {
-    console.log('Hey there 👋');
-    console.log(this);
-  }
-}
-
-const jessica = new PersonCl1('hett varasada', 2003)
-
-console.log(account.latest);
-account.latest = 50; //set value..
-console.log(account.movements);
-
+console.log()account.latest;
 
