@@ -68,8 +68,6 @@
 // //   res.end("WElcome to server !");
 // // });
 
-
-
 // http
 //   .createServer((req, res) => {
 //     // res.statusCode = 200;
@@ -96,15 +94,13 @@
 //   resp.on("data", (bunch) => {
 //     data += bunch;
 //   });
-  
+
 //   resp.on("end", () => {
 //     let JSONdata = JSON.parse(data);
 //     console.log(JSONdata);
 //   });
 
-  
 // });
-
 
 /*      -----HTTP SERVER-----   */
 
@@ -112,13 +108,12 @@
 
 //OR..->
 
-const axios = require("axios");
+// const axios = require("axios");
 
-
-const data = JSON.stringify({
-  name: "John Doe",
-  Job: "Content Writer"
-});
+// const data = JSON.stringify({
+//   name: "John Doe",
+//   Job: "Content Writer"
+// });
 
 // const option = {
 //   hostname: 'reqres.in',
@@ -128,7 +123,6 @@ const data = JSON.stringify({
 //     'Content-Type' : 'applicatin/json'
 //   }
 // }
-
 
 // const req = http.request(option, (res) => {
 //   let body = '';
@@ -148,10 +142,116 @@ const data = JSON.stringify({
 
 //OR..->
 
-axios.post('https://reqres.in/api/users', data).then((result) => {
-  console.log(`status-code : ${result.status}`)
-  console.log(`body : ${JSON.stringify(result.data)}`)
+// axios.post('https://reqres.in/api/users', data).then((result) => {
+//   console.log(`status-code : ${result.status}`)
+//   console.log(`body : ${JSON.stringify(result.data)}`)
+
+// }).catch((err) => {
+//   console.log(err);
+// });
+
+/*      -----WORKING WITH FILE-----   */
+
+// const fs = require("fs");
+
+// fs.readFile("test.txt", "utf8", (err, data) => {
+//   if (err) throw err;
+
+//   console.log(data);
+// }); //asychroneous way
+
+// const data = fs.readFileSync("test.txt", { encoding: "utf-8", flag: "r" }); //synchroneous way...
+
+// console.log(data);
+
+// fs.stat("test.txt", (err, stat) => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+
+//   console.log(stat.isFile());
+//   console.log(stat.isDirectory());
+//   console.log(stat.isSymbolicLink());
+// });
+
+//r+ -> reading , wtiting
+//w+ -> delete previous data and add
+//a+ ->  reading and writing and add at the end
+//a -> only write
+
+// const contentSync = [{
+//   type: "Node application"
+// }]
+// const contentAsync = "node application ";
+
+// fs.writeFileSync('test.json', JSON.stringify(contentSync));
+
+// fs.writeFile("test1.txt", contentAsync, {
+//   flag: "w+",
+// }, err => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+
+//   console.log("successfully done!")
+// });
+
+// fs.unlink('test1.txt', err => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log('removed !');
+// })  //delete file...
+
+/*      -----ROUNTING-----   */
+
+const http = require("http");
+
+// function index(request, respose) {
+//   respose.writeHead(200);
+//   respose.end("Routing is running...");
+//   console.log("home page is running");
+// }
+
+// function about(request, respose) {
+//   respose.end("about us page is running...");
+//   console.log("about page is running");
+// }
+
+// http
+//   .createServer(function (req, res) {
+//     if (req.url == "/") {
+//       return index(req, res);
+//     }
+
+//     if (req.url == "/about") {
+//       return about(req, res);
+//     }
+//   })
+//   .listen(process.env.PORT || 8000);
+
+  //OR..->
+
+  const routes = {
+    "/": function index(request, respose) {
+      respose.writeHead(200);
+      respose.end("Routing is running...");
+      console.log("home page is running");
+    },
   
-}).catch((err) => {
-  console.log(err);
-});
+    "/about": function about(request, respose) {
+      respose.end("about us page is running...");
+      console.log("about page is running");
+    },
+  };
+  
+  http
+    .createServer(function (req, res) {
+      if (req.url in routes) {
+        return routes[req.url](req, res);
+    }
+    })
+    .listen(process.env.PORT || 8000);
