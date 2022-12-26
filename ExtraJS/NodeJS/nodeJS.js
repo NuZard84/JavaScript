@@ -208,7 +208,7 @@
 
 /*      -----ROUNTING-----   */
 
-const http = require("http");
+// const http = require("http");
 
 // function index(request, respose) {
 //   respose.writeHead(200);
@@ -233,25 +233,104 @@ const http = require("http");
 //   })
 //   .listen(process.env.PORT || 8000);
 
-  //OR..->
+//OR..->
 
-  const routes = {
-    "/": function index(request, respose) {
-      respose.writeHead(200);
-      respose.end("Routing is running...");
-      console.log("home page is running");
-    },
-  
-    "/about": function about(request, respose) {
-      respose.end("about us page is running...");
-      console.log("about page is running");
-    },
-  };
-  
-  http
-    .createServer(function (req, res) {
-      if (req.url in routes) {
-        return routes[req.url](req, res);
-    }
-    })
-    .listen(process.env.PORT || 8000);
+// const routes = {
+//   "/": function index(request, respose) {
+//     respose.writeHead(200);
+//     respose.end("Routing is running...");
+//     console.log("home page is running");
+//   },
+
+//   "/about": function about(request, respose) {
+//     respose.end("about us page is running...");
+//     console.log("about page is running");
+//   },
+// };
+
+// http
+//   .createServer(function (req, res) {
+//     if (req.url in routes) {
+//       return routes[req.url](req, res);
+//   }
+//   })
+//   .listen(process.env.PORT || 8000);
+
+/*      -----EVEBT MODULE-----   */
+
+// const events = require("events");
+
+// const ev = new events.EventEmitter();
+
+// var func = function (data) {
+//   console.log("i will be unregister !!");
+// };
+// ev.on("MY_EVENT", () => console.log("hello het i am here !"));
+// ev.once("MY_EVENT0", () => console.log("het this is my last visit !!"));
+// ev.on("MY_EVENT1",func);
+// ev.off("MY_EVENT1", func); //this perticular event will be unregister..
+
+// ev.emit("MY_EVENT");
+// ev.emit("MY_EVENT0");
+// ev.emit("MY_EVENT0"); //this will be not execute
+// ev.emit("MY_EVENT1","ok"); // this is unregistered
+
+/*      -----STREAM-----   */
+
+// const http = require("http");
+// const fs = require("fs");
+// const { resolve } = require("path");
+
+// const server = http.createServer((req, res) => {
+//   // fs.readFile("test.json", (err, data) => {
+//   //   if (err) throw err;
+//   //   res.end(data);
+//   // });
+
+//   const stream = fs.createReadStream("test.json");
+//   stream.pipe(res); // this will send files data chunck by chunck(pecies) it is way more efficient...
+// });
+
+// server.listen(process.env.PORT || 3000, () => {
+//   console.log("server is running at 3000 PORT");
+// });
+
+/*      -----PROMISES-----   */
+
+// const promise1 = new Promise((resolve, reject) => {
+//   setTimeout(resolve('resolved 45', 1500));
+// })
+// const promise2 = new Promise ((resolve, reject) => {
+//   setTimeout(reject('no resolved!!'),1000)
+// });
+// const promise3 = Promise.resolve('directly resolve');
+
+// Promise.all([promise1, promise2, promise3]).then(value => {
+//   console.log(value);  //it will be promise all..
+//  })
+
+// Promise.any([promise1, promise2, promise3]).then(value => {
+//   console.log(value);  //45
+// });
+
+// Promise.race([promise1, promise2, promise3]).then(value => {
+//   console.log(value); //resolved 45 is print cause it is fastest resolve promises...
+// });
+
+
+/*      -----BUFFER-----   */
+
+const buf = Buffer.from('hey!');
+const bufAlloc = Buffer.alloc(4);
+bufAlloc.write('hell');
+
+console.log(buf[0]);
+console.log(buf[1]);
+console.log(buf[2]);
+console.log(buf[3]);
+
+console.log(buf);
+console.log(buf.toString());
+buf[1] = 111 // o
+console.log(buf.toString());
+console.log(bufAlloc.toString()); //hell  
