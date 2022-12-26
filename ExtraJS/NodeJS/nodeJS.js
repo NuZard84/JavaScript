@@ -317,20 +317,45 @@
 //   console.log(value); //resolved 45 is print cause it is fastest resolve promises...
 // });
 
-
 /*      -----BUFFER-----   */
 
-const buf = Buffer.from('hey!');
-const bufAlloc = Buffer.alloc(4);
-bufAlloc.write('hell');
+// const buf = Buffer.from('hey!');
+// const bufAlloc = Buffer.alloc(4);
+// bufAlloc.write('hell');
 
-console.log(buf[0]);
-console.log(buf[1]);
-console.log(buf[2]);
-console.log(buf[3]);
+// console.log(buf[0]);
+// console.log(buf[1]);
+// console.log(buf[2]);
+// console.log(buf[3]);
 
-console.log(buf);
-console.log(buf.toString());
-buf[1] = 111 // o
-console.log(buf.toString());
-console.log(bufAlloc.toString()); //hell  
+// console.log(buf);
+// console.log(buf.toString());
+// buf[1] = 111 // o
+// console.log(buf.toString());
+// console.log(bufAlloc.toString()); //hell
+
+///*      -----BUFFER-----   */
+const path = require("path");
+
+file0 = path.basename("NodeJS/test.json");
+file1 = path.dirname("NodeJS/test.json");
+file2 = path.isAbsolute("NodeJS/test.json");
+let dir = "NodeJS";
+file3 = path.join(dir, "/test.json");
+file4 = path.parse("NodeJS/test.json");
+file5 = path.resolve("NodeJS/test.json");
+file6 = path.resolve("/NodeJS", "test.json");
+
+console.log(file0); //test.json
+console.log(file1); //NodeJS
+console.log(file2); //false
+console.log(file3); //NodeJS/test.json
+console.log(file4); /*{
+    root: '',                                 
+    dir: 'NodeJS',    
+    base: 'test.json',
+    ext: '.json',
+    name: 'test'
+  } */
+console.log(file5); //C:\CodeWork\JS\JavaScript\ExtraJS\NodeJS\NodeJS\test.json
+console.log(file6); //C:\NodeJS\test.json
