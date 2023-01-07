@@ -6,8 +6,9 @@ const { v4: uuidv4 } = require("uuid");
 const router = require("./router");
 
 
+
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 
 //parse body code to access inputs data
 app.use(bodyParser.json());

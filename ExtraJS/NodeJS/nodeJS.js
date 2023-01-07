@@ -104,7 +104,7 @@
 
 /*      -----HTTP SERVER-----   */
 
-// const http = require("https"); //here we use ttps module cause may api site block http req due to SSL issue..
+// const http = require("https"); //here we use https module cause may api site block http req due to SSL issue..
 
 //OR..->
 
